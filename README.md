@@ -167,7 +167,7 @@ The screen displays the four containers that are registered to the scale. Each c
 ### Basic Usage
 Please place one container on the scale at a time, the screen will indicate when the container has been found and when the next container can be removed or placed on the scale. 
 
-### WeB UI
+### Web UI
 
 Upon logging into the web UI all the shelves associated with the user's system will be displayed.
 
