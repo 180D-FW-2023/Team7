@@ -7,4 +7,10 @@ A shelf with an openCV based camera system to keep track of the mass of the cont
 # Installation
 
 ## Depedencies
-Run ```pip install -r requirements.txt``` to install all necessary packages on the Raspberry Pi
+Run
+
+```xargs sudo apt-get -y install < aptGetPackages.txt```
+
+```pip install -r pipPackages.txt``` 
+
+to install all necessary packages on the Raspberry Pi
