@@ -170,6 +170,7 @@ Please place one container on the scale at a time, the screen will indicate when
 ### WeB UI
 
 Upon logging into the web UI all the shelves associated with the user's system will be displayed.
+
 <img src="https://github.com/180D-FW-2023/Team7/assets/105705018/19138f32-b2ce-4319-be1d-6a72c2a126db" width=25% height=25%>
 
 * Renaming 
