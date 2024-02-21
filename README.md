@@ -171,7 +171,7 @@ Please place one container on the scale at a time, the screen will indicate when
 
 Upon logging into the web UI all the shelves associated with the user's system will be displayed.
 
-<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/19138f32-b2ce-4319-be1d-6a72c2a126db" width=25% height=25%>
+<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/19138f32-b2ce-4319-be1d-6a72c2a126db" width=45% height=45%>
 
 * Renaming
    
@@ -181,6 +181,6 @@ If users would like to rename the shelf or the containers on the shelf, the edit
   
 When clicking on a container's percentage gauge the user will be presented with a screen that looks like the following:
 
-<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/b94c4958-6a71-4475-8ac7-b5ddb1345590" width=25% height=25%>
+<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/b94c4958-6a71-4475-8ac7-b5ddb1345590" width=45% height=45%>
 
 Within this screen users will see more information on the containers, including the mass, initial mass, and environmental parameters. Using the sliders users can enable environmental monitoring parameters. When the set thresholds are surpassed, the user will be alerted on the home screen with a red notification in the top right of the screen. 
