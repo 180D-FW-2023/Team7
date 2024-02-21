@@ -5,7 +5,7 @@ A shelf with an openCV based monitoring system to track respective quantities of
 # Repository Organization
 
 ### Container Labels
-Contains labels to affix to 4 containers, additional labels can be generated using the provided python script (```qrCodeGenerator.py```). Labels should follow the following convention:
+Contains labels to affix to 4 containers (```containerQRCodes.png```), additional labels can be generated using the provided python script (```qrCodeGenerator.py```). Labels should follow the following convention:
 ``` Container_X ``` 
 
 ### Firebase Setup
