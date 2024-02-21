@@ -27,7 +27,7 @@ https://firebase.google.com/docs/database
 ```
 
 ### Shelf Code
-Contains the code that will be run on the scale, if you would like you can set this to automatically run after initial setup. A guide on how to do that can be found here:
+Contains the code that will be run on the scale (```main.py```), if you would like you can set this to automatically run after initial setup. A guide on how to do that can be found here:
 ```
 https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
 ```
