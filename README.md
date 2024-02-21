@@ -11,7 +11,7 @@ Labels should follow the following convention:
 ``` Container_X ``` 
 
 ### Firebase Setup
-Contains the code and a json to setup the Firebase real time database. The code must be run once per scale to set up the real time database prior to use. Please note you will need to provide a json file with your real time database API keys in this folder.
+Contains ```firebaseSetup.py``` and a json to setup the Firebase real time database. The ```firebaseSetup.py``` must be run once per scale to set up the real time database prior to use, be sure to follow the comments in the file to ensure the database is configured correctly. Please note you will need to provide a json file with your real time database API keys in this folder.
 
 Replace the following: 
 ``` 
