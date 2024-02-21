@@ -1,16 +1,16 @@
 # SmartShelves
 
-A shelf with an openCV based camera system to keep track of the mass of the contents in containers and enviornmental montioring. 
+A shelf with an openCV based camera system to keep track of the mass of the contents in containers and environmental monitoring. 
 
 # Repository organization
 
 ### Container Labels
-Contains labels to affix to 4 containers, additional labels can be generated used the provided python script. 
+Contains labels to affix to 4 containers, additional labels can be generated using the provided python script. 
 Labels should follow the following convention:
 ``` Container_X ``` 
 
 ### Firebase Setup
-Contains the code and a json to setup the Firebase real time database. The code must be ran once to per scale to setup the real time database prior to use. Please note you will need to provide a json file with your real time database API keys in this folder.
+Contains the code and a json to setup the Firebase real time database. The code must be run once per scale to set up the real time database prior to use. Please note you will need to provide a json file with your real time database API keys in this folder.
 
 Replace the following: 
 ``` 
@@ -18,9 +18,9 @@ ece-180-project-firebase-adminsdk-7eg04-74b6c29e0b.json
 
 https://ece-180-project-default-rtdb.firebaseio.com/
 ``` 
-with the proper infomration for your realtime database. 
+with the proper information for your realtime database. 
 
-Additioal help can be found at the following links:
+Additional help can be found at the following links:
 ```
 https://www.freecodecamp.org/news/how-to-get-started-with-firebase-using-python/
 
@@ -28,7 +28,7 @@ https://firebase.google.com/docs/database
 ```
 
 ### Shelf Code
-Contains the code that will be ran on the scale, if you would like you can set this to automatically run after intial setup. A guide on how to do that can be found here:
+Contains the code that will be run on the scale, if you would like you can set this to automatically run after initial setup. A guide on how to do that can be found here:
 ```
 https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
 ```
