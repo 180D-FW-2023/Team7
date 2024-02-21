@@ -153,10 +153,10 @@ python main.py
 # Usage
  
 ### Initial Start Up
-Allow the shelf to start up, upon first start up the scale will require calibration. It will prompt the user to remove all weights and then place an item of known mass on the scale. After following the prompts, the scale is ready for use!
+Allow the shelf to start up, upon first start up the scale will require calibration. The screen will prompt the user to remove all weights and then place an item of known mass on the scale. After following the prompts, the scale is ready for use and will not need to be calibrated again!
 
 ### Screen
-The screen displays the four containers that are registered to the scale. Each container will display the name the user has set in the Web UI as well as the percentage of product remaining. A '*' character to the left of the container indicates that the container is present. 
+The screen displays the four containers that are registered to the scale. Each container will display the name the user has set in the Web UI as well as the last known percentage of product remaining. A '*' character to the left of the container indicates that the container is present. 
 ```
 * Container_1 10%
   Container_2 60%
