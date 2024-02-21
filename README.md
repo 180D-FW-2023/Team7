@@ -103,7 +103,6 @@ allow-hotplug wlan1 iface wlan1 inet manual
 
 iface home inet dhcp 
 iface school inet dhcp
-
 ```
 Now restart the Pi using the following command: 
 ``` 
@@ -141,7 +140,6 @@ echo 'dtparam=i2c1=on' >> /boot/config.txt
 
 exit
 sudo shutdown -r now
-
 ``` 
 
 To run the shelf's Code
