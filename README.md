@@ -37,6 +37,10 @@ https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-sta
 Contains all the code needed to run the web server. This project was bootstrapped with Create React App. More information can be found in the ```README.md``` found in the directory. The web server can be hosted locally or in the cloud with services such as AWS. Please note you will need to provide your own ```firebase.tsx``` and place it in ```src```.
 
 # Shelf Hardware
+
+<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/9b200be9-9ad3-4c5c-ab37-63856f8ea5e1" width=25% height=25%>
+
+
 ```
 Raspberry Pi 4 + Power Adaptor, SD Card, and Case
 Adafruit 2.23" Monochrome OLED Bonnet
