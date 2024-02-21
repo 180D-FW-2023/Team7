@@ -53,6 +53,7 @@ STEMMA QT / Qwiic JST SH 4-Pin Cable (Several in various lengths, generic)
 Strain Gauge Load Cell - 4 Wires (Generic)
 Laser Cut Acrylic 
 A Webcam (Any should work)
+Containers (4 Matching ones)
 ```
 # Installation
 
