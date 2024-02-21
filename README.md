@@ -77,6 +77,7 @@ pip install -r pipPackages.txt
 To run the shelf's Code
 
 ```
+cd ~ 
 cd Team7/Shelf Code
 python main.py
 ```
