@@ -1,0 +1,8 @@
+smbus2 
+paho-mqtt 
+adafruit-python-shell
+adafruit-circuitpython-register 
+adafruit-circuitpython-sht4x 
+adafruit-circuitpython-ltr390 
+adafruit-circuitpython-ssd1305
+

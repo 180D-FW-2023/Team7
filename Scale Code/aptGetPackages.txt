@@ -1,0 +1,5 @@
+git 
+i2c-tools 
+libi2c-dev 
+socket python3-pip
+python3-setuptools
