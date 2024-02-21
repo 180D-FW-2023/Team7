@@ -10,7 +10,7 @@ Labels should follow the following convention:
 ``` Container_X ``` 
 
 ### Firebase Setup
-Contains the code and a json to setup the Firebase real time database. The code must be ran once to per scale to setup the real time database prior to use. 
+Contains the code and a json to setup the Firebase real time database. The code must be ran once to per scale to setup the real time database prior to use. Please note you will need to provide a json file with your real time database API keys in this folder.
 
 Replace the following: 
 ``` 
