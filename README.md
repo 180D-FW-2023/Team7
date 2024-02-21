@@ -56,7 +56,64 @@ Containers (4 Matching ones)
 ```
 
 # Installation
-Assuming that the Pi has been configured to allow SSH and is connected to the network.
+Assuming that the Pi has been configured to allow SSH.
+
+Wifi Configuration for UCLA's eduroam
+```
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+```
+Delete everything and replace with:
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev 
+update_config=1 
+country=US 
+
+network={ 
+      ssid="network_one_here" 
+      psk="wpa_password" 
+      id_str="home" 
+} 
+
+network={ 
+      ssid="eduroam"
+      scan_ssid=1
+      key_mgmt=WPA-EAP
+      eap=PEAP
+      identity="yourusername@ucla.edu"
+      password="yourpassword"
+      phase1="peaplabel=0"
+      phase2="auth=MSCHAPV2"
+      id_str="school" 
+}
+```
+Save, exit, and run the following command: 
+```
+sudo nano /etc/network/interfaces
+```
+Delete everything and replace with:
+```
+auto lo iface lo inet loopback 
+iface eth0 inet manual 
+
+allow-hotplug wlan0 iface wlan0 inet manual 
+      wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf 
+
+allow-hotplug wlan1 iface wlan1 inet manual 
+      wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf 
+
+iface home inet dhcp 
+iface school inet dhcp
+
+```
+Now restart the Pi using the following command: 
+``` 
+sudo shutdown -r now
+```
+Test connectivity:
+```
+ping google.com
+```
+
 
 Run the following commands to prepare the Raspberry Pi:
 
