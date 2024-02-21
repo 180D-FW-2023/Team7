@@ -6,6 +6,7 @@ A shelf with an openCV based camera system to keep track of the mass of the cont
 
 ### Container Labels
 Contains labels to affix to 4 containers, additional labels can be generated using the provided python script (```qrCodeGenerator.py```). 
+
 Labels should follow the following convention:
 ``` Container_X ``` 
 
