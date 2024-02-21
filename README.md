@@ -173,10 +173,12 @@ Upon logging into the web UI all the shelves associated with the user's system w
 
 <img src="https://github.com/180D-FW-2023/Team7/assets/105705018/19138f32-b2ce-4319-be1d-6a72c2a126db" width=25% height=25%>
 
-* Renaming 
+* Renaming
+   
 If users would like to rename the shelf or the containers on the shelf, the edit button next to the name will allow the user to do so. This will update the name in the web UI as well as on the display within several seconds. 
 
-* More information / Environmental Monitoring 
+* More information / Environmental Monitoring
+  
 When clicking on a container's percentage gauge the user will be presented with a screen that looks like the following:
 
 <img src="https://github.com/180D-FW-2023/Team7/assets/105705018/b94c4958-6a71-4475-8ac7-b5ddb1345590" width=25% height=25%>
