@@ -1,6 +1,6 @@
 # SmartShelves
 
-A shelf with an openCV based camera system to keep track of the mass of the contents in containers and environmental monitoring. 
+A shelf with an openCV based camera system to monitor respective quantities of products in containers. Also incorporates environmental monitoring for products sensitive to light, temperature, or humidity. 
 
 # Repository Organization
 
