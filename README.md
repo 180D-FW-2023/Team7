@@ -167,7 +167,7 @@ The screen displays the four containers that are registered to the scale. Each c
 ### Basic Usage
 Please place one container on the scale at a time, the screen will indicate when the container has been found and when the next container can be removed or placed on the scale. 
 
-### WEB UI
+### WeB UI
 
 <img src="https://github.com/180D-FW-2023/Team7/assets/105705018/19138f32-b2ce-4319-be1d-6a72c2a126db" width=25% height=25%>
 
