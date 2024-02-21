@@ -54,6 +54,7 @@ Laser Cut Acrylic
 A Webcam (Any should work)
 Containers (4 Matching ones)
 ```
+
 # Installation
 Assuming that the Pi has been configured to allow SSH and is connected to the network.
 
@@ -73,6 +74,17 @@ cd ~
 wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
 sudo -E env PATH=$PATH python3 raspi-blinka.py
 pip install -r pipPackages.txt
+
+sudo -i
+
+echo 'i2c-dev' >> /etc/modules
+echo 'i2c-bcm2708' >> /etc/modules
+echo 'dtparam=i2c_arm=on' >> /boot/config.txt
+echo 'dtparam=i2c1=on' >> /boot/config.txt
+
+exit
+sudo shutdown -r now
+
 ``` 
 
 To run the shelf's Code
