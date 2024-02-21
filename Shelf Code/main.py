@@ -229,7 +229,7 @@ def read_raw_value(samples=5):
 def calibrate_weight_sensor():
     global gain
     # Prompt the user to press enter when the sensor is empty
-    print("Press enter when the sensor is empty.")
+    print("Please remove all objects from the scale and press enter.")
     input()
 
     # Read the value of the sensor when empty
@@ -248,6 +248,9 @@ def calibrate_weight_sensor():
     # Print the calibration parameters
     print("Scale Gain:", gain)
     update_firebase_scale("Scale Gain", gain)
+    print("Please remove all objects from the scale within the next 5 seconds.")
+    time.sleep(5)
+    print("Calibration complete!")
 
 # this defines the path that openCV frames will be stored to, this is used for debugging purposes
 path = './OpenCVImages'
