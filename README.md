@@ -58,7 +58,7 @@ Containers (4 Matching ones)
 # Installation
 Assuming that the Pi has been configured to allow SSH.
 
-Wifi Configuration for UCLA's eduroam
+Wifi configuration for UCLA's eduroam, ignore if using a private network.
 ```
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 ```
