@@ -52,7 +52,6 @@ A Webcam (Any should work)
 ```
 # Installation
 
-## Shelf Depedencies
 Run the following commands to prepare the Raspberry Pi
 
 ```
@@ -70,7 +69,8 @@ wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/m
 sudo -E env PATH=$PATH python3 raspi-blinka.py
 pip install -r pipPackages.txt
 ``` 
-## Running the Self's Code
+
+To run the shelf's Code
 
 ```
 cd Team7/Shelf Code
