@@ -1,0 +1,8 @@
+.collapseTitle{ 
+    padding-bottom: 0px;
+    text-align: left;
+    font-size: calc(5px + 2vmin);;
+    margin-bottom: 0px;
+    font-weight: 400;
+    margin-top: 0px;
+}

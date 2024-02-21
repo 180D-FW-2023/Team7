@@ -1,0 +1,31 @@
+.modaltitle .ant-modal-title{
+    text-align: center;
+}
+
+.modal-first-body{
+    text-align: center;
+}
+
+.modal-subtitle{
+    text-align: center;
+    font-weight: 400;
+    font-size: 15px;
+    text-decoration: underline;
+}
+
+.checkbox-name{
+    display: flex;
+    align-items: center;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.checkbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0px !important;
+}
+.slider{
+    padding-left: 0px !important;
+}

@@ -1,0 +1,10 @@
+.ant-card .ant-card-head{
+    /* border: none; */
+    /* border-bottom-width: 0px !important; */
+    box-shadow: 'transparent'
+    /* flex: 1 1 calc(50% - 10px);
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center; */
+}
