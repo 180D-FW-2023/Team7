@@ -55,7 +55,7 @@ A Webcam (Any should work)
 Containers (4 Matching ones)
 ```
 # Installation
-Assuming that the Pi has been configured the raspberry to allow SSH and is connected to the network.
+Assuming that the Pi has been configured to allow SSH and is connected to the network.
 
 Run the following commands to prepare the Raspberry Pi:
 
