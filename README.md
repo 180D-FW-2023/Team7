@@ -149,3 +149,30 @@ cd ~
 cd Team7/Shelf Code
 python main.py
 ```
+
+# Usage
+ 
+### Initial Start Up
+Allow the shelf to start up, upon first start up the scale will require calibration. It will prompt the user to remove all weights and then place an item of known mass on the scale. After following the prompts, the scale is ready for use!
+
+### Screen
+The screen displays the four containers that are registered to the scale. Each container will display the name the user has set in the Web UI as well as the percentage of product remaining. A '*' character to the left of the container indicates that the container is present. 
+```
+* Container_1 10%
+  Container_2 60%
+  Container_3 30%
+* Container_4 100%
+```
+
+### Basic Usage
+Please place one container on the scale at a time, the screen will indicate when the container has been found and when the next container can be removed or placed on the scale. 
+
+### WEB UI
+
+<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/19138f32-b2ce-4319-be1d-6a72c2a126db" width=25% height=25%>
+
+Upon logging into the web UI all the shelves associated with the user's system will be displayed. If users would like to rename the shelf or the containers on the shelf, the edit button next to the name will allow the user to do so. When clicking on a container's percentage gauge the user will be presented with a screen that looks like the following:
+
+<img src="https://github.com/180D-FW-2023/Team7/assets/105705018/b94c4958-6a71-4475-8ac7-b5ddb1345590" width=25% height=25%>
+
+Within this screen users will see more information on the containers, including the mass, initial mass, and environmental parameters. Using the sliders users can enable environmental monitoring parameters. When the thresholds are surpassed, the user will be alerted on the home screen with a red notification in the top right of their screen. 
