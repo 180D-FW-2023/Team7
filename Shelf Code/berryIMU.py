@@ -36,12 +36,12 @@ AA =  0.40      # Complementary filter constant
 # Calibrating the compass isnt mandatory, however a calibrated
 # compass will result in a more accurate heading value.
 
-magXmin =  83
-magYmin =  -853
-magZmin =  -2887
-magXmax =  2694
-magYmax =  1192
-magZmax =  -399
+magXmin =  0
+magYmin =  0
+magZmin =  0
+magXmax =  0
+magYmax =  0
+magZmax =  0
 
 
 '''
@@ -290,7 +290,15 @@ while True:
     if 1:                       #Change to '0' to stop  showing the angles from the complementary filter
         outputString +="\t#  CFangleX Angle %5.2f   CFangleY Angle %5.2f  #" % (CFangleX,CFangleY)
 
-    print(outputString)
+    #print(outputString)
+
+    threshold = 45.0
+
+    if CFangleX >= threshold or CFangleY >= threshold:
+        print("Tilted")
+    else:
+        print("Normal")
+
 
     #slow program down a bit, makes the output more readable
-    time.sleep(0.03)
+    time.sleep(1)
