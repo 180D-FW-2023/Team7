@@ -292,9 +292,9 @@ while True:
 
     #print(outputString)
 
-    threshold = 45.0
+    threshold = 30.0
 
-    if CFangleX >= threshold or CFangleY >= threshold:
+    if abs(CFangleX) >= threshold or abs(CFangleY) >= threshold:
         print("Tilted")
     else:
         print("Normal")
