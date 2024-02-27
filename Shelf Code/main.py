@@ -230,6 +230,7 @@ def calibrate_weight_sensor():
     global gain
     # Prompt the user to press enter when the sensor is empty
     print("Please remove all objects from the scale and press enter.")
+    display_message("Please remove all", "objects from the scale")
     input()
 
     # Read the value of the sensor when empty
@@ -449,16 +450,17 @@ def display_message(line1, line2):
     disp.show()
     time.sleep(0.1)
 
-# Draw our four lines of text
-draw.text((x, top + 0),  "Local IP", font=font, fill=255)
-draw.text((x, top + 8),  local_ip, font=font, fill=255)
-draw.text((x, top + 16),  "External IP", font=font, fill=255)
-draw.text((x, top + 25),  external_ip, font=font, fill=255)
+""" Display the IP address on the OLED """
+def display_ip():
+    draw.text((x, top + 0),  "Local IP", font=font, fill=255)
+    draw.text((x, top + 8),  local_ip, font=font, fill=255)
+    draw.text((x, top + 16),  "External IP", font=font, fill=255)
+    draw.text((x, top + 25),  external_ip, font=font, fill=255)
+    disp.image(image)
+    disp.show()
+    time.sleep(2)
 
-# Display image.
-disp.image(image)
-disp.show()
-time.sleep(2)
+display_ip()
 
 ### Main loop
 while True:
