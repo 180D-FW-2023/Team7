@@ -435,12 +435,13 @@ def update_display():
     time.sleep(0.2)
 
 """ Display status messages on the OLED """
-def display_message(message):
+def display_message(line1, line2):
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     # Draw our four lines of text
-    draw.text((x, top + 0),  message, font=font, fill=255)
+    draw.text((x, top + 0),  line1, font=font, fill=255)
+    draw.text((x, top + 8),  line2, font=font, fill=255)
 
     # Display image.
     disp.image(image)
@@ -463,7 +464,7 @@ while True:
     # CASE 1: INCREASE IN MASS
     if (differenceInMass > thresholdMass):
         # Tell the user we are searching for the new container
-        display_message("Determining what was added...")
+        display_message("Determining what was", "added...")
 
         # Find the new container
         newContainer = findNewContainer()
@@ -472,7 +473,7 @@ while True:
         presentContainers[newContainer] = True
 
         # Tell the user we determined what container it was
-        display_message(get_name(newContainer) + " was put back!")
+        display_message(get_name(newContainer),  "was put back!")
         time.sleep(1)
 
         # Get a settled reading from the scale
@@ -490,7 +491,7 @@ while True:
         time.sleep(1)
 
         # Tell the user we are searching for a container that was removed
-        display_message("Determining what was removed...")
+        display_message("Determining what was", "removed...")
         
         # Find the container that was removed
         removedContainer = findRemovedContainer()
@@ -499,7 +500,7 @@ while True:
         presentContainers[removedContainer] = False
 
         # Notify the user we found the container that was removed
-        display_message(get_name(removedContainer) + " was removed!")
+        display_message(get_name(removedContainer), "was removed!")
         time.sleep(1)
 
         # Make all the prevMasses the current mass so the next iteration doesn't think there was a change
