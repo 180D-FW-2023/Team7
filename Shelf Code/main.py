@@ -3,7 +3,6 @@ import board
 from cedargrove_nau7802 import NAU7802
 import smbus2 as smbus
 import math
-import bmp388 as bmp
 import adafruit_sht4x
 import busio
 import adafruit_ltr390
@@ -279,9 +278,6 @@ if(gain == 0.0):
     calibrate_weight_sensor()
 
 print("LOAD CELL READY")
-
-bmp.bmp388 = bmp.BMP388()
-print("BMP388 READY")
 
 sht = adafruit_sht4x.SHT4x(board.I2C())
 print("SHT4X READY")
