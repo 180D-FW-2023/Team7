@@ -23,7 +23,8 @@ import urllib.request
 
 # Obtain the local and public IP address of the Pi + print to console 
 cmd = "hostname -I | cut -d' ' -f1"
-print("Local IP: " + str(subprocess.check_output(cmd, shell=True).decode("utf-8")))
+local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
+print("Local IP: " + local_ip)
 external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
 print("Public IP: " + str(external_ip))
 
@@ -448,6 +449,16 @@ def display_message(line1, line2):
     disp.show()
     time.sleep(0.1)
 
+# Draw our four lines of text
+draw.text((x, top + 0),  "Local IP", font=font, fill=255)
+draw.text((x, top + 8),  local_ip, font=font, fill=255)
+draw.text((x, top + 16),  "External IP", font=font, fill=255)
+draw.text((x, top + 25),  external_ip, font=font, fill=255)
+
+# Display image.
+disp.image(image)
+disp.show()
+time.sleep(2)
 
 ### Main loop
 while True:
