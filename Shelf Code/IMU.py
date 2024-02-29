@@ -6,14 +6,7 @@ from LSM6DSL import *
 from LIS3MDL import *
 import time
 
-
-
-
 BerryIMUversion = 99
-
-
-
-
 
 def detectIMU():
     #Detect which version of BerryIMU is connected using the 'who am i' register
@@ -67,23 +60,8 @@ def detectIMU():
             BerryIMUversion = 3
     time.sleep(1)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 def writeByte(device_address,register,value):
     bus.write_byte_data(device_address, register, value)
-
-
 
 def readACCx():
     acc_l = 0
@@ -101,11 +79,6 @@ def readACCx():
     acc_combined = (acc_l | acc_h <<8)
     return acc_combined  if acc_combined < 32768 else acc_combined - 65536
 
-
-
- 
-
-
 def readACCy():
     acc_l = 0
     acc_h = 0
@@ -121,7 +94,6 @@ def readACCy():
 
     acc_combined = (acc_l | acc_h <<8)
     return acc_combined  if acc_combined < 32768 else acc_combined - 65536
-
 
 def readACCz():
     acc_l = 0
@@ -139,7 +111,6 @@ def readACCz():
     acc_combined = (acc_l | acc_h <<8)
     return acc_combined  if acc_combined < 32768 else acc_combined - 65536
 
-
 def readGYRx():
     gyr_l = 0
     gyr_h = 0
@@ -155,7 +126,6 @@ def readGYRx():
 
     gyr_combined = (gyr_l | gyr_h <<8)
     return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
-
 
 def readGYRy():
     gyr_l = 0
@@ -189,7 +159,6 @@ def readGYRz():
     gyr_combined = (gyr_l | gyr_h <<8)
     return gyr_combined  if gyr_combined < 32768 else gyr_combined - 65536
 
-
 def readMAGx():
     mag_l = 0
     mag_h = 0
@@ -205,7 +174,6 @@ def readMAGx():
 
     mag_combined = (mag_l | mag_h <<8)
     return mag_combined  if mag_combined < 32768 else mag_combined - 65536
-
 
 def readMAGy():
     mag_l = 0
@@ -223,7 +191,6 @@ def readMAGy():
     mag_combined = (mag_l | mag_h <<8)
     return mag_combined  if mag_combined < 32768 else mag_combined - 65536
 
-
 def readMAGz():
     mag_l = 0
     mag_h = 0
@@ -239,8 +206,6 @@ def readMAGz():
 
     mag_combined = (mag_l | mag_h <<8)
     return mag_combined  if mag_combined < 32768 else mag_combined - 65536
-
-
 
 def initIMU():
 

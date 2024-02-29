@@ -20,6 +20,7 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1305
 from requests import get
 import urllib.request
+import berryIMU
 
 # Obtain the local and public IP address of the Pi + print to console 
 cmd = "hostname -I | cut -d' ' -f1"
@@ -134,6 +135,8 @@ def getSensorReadings():
     update_firebase_scale("Scale Humidity", sht_relative_humidity) 
     update_firebase_scale("Scale UV", ltr_uvi) 
     update_firebase_scale("Scale Lux", ltr_lux) 
+
+    berryIMU.tiltCheck()
 
     # Print the sensor readings to console for logging purposes
     print("=====")
