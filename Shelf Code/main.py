@@ -25,26 +25,6 @@ import berryIMU
 local_ip = ''
 external_ip = ''
 
-# Obtain the local and public IP address of the Pi + print to console 
-def getIP():
-    global local_ip
-    global external_ip
-
-    cmd = "hostname -I | cut -d' ' -f1"
-    local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
-    print("Local IP: " + local_ip)
-    external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-    print("Public IP: " + str(external_ip))
-    update_firebase_ip(external_ip)
-    display_ip()
-
-# Push the IP to Firebase
-# If we are using eduroam we can use this IP to log in remotely
-def update_firebase_ip(IP):
-    update_firebase_scale("Public IP", str(IP))
-
-getIP()
-
 # Degree sign const for easy use later on
 degree_sign = u'\N{DEGREE SIGN}'
 # Tuned to account for small bumps on the scale when placing and removing containers
@@ -337,6 +317,27 @@ presentContainers = {
   "Container_3": False,
   "Container_4": False
 }
+
+# Obtain the local and public IP address of the Pi + print to console 
+def getIP():
+    global local_ip
+    global external_ip
+
+    cmd = "hostname -I | cut -d' ' -f1"
+    local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
+    print("Local IP: " + local_ip)
+    external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+    print("Public IP: " + str(external_ip))
+    update_firebase_ip(external_ip)
+    display_ip()
+
+# Push the IP to Firebase
+# If we are using eduroam we can use this IP to log in remotely
+def update_firebase_ip(IP):
+    update_firebase_scale("Public IP", str(IP))
+
+getIP()
+
 
 """ Find the new container that resulted in the mass change """
 def findNewContainer(): # Returns a string with the name of the new container
