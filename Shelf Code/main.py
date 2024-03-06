@@ -127,7 +127,7 @@ def getSensorReadings():
     update_firebase_scale("Scale UV", ltr_uvi) 
     update_firebase_scale("Scale Lux", ltr_lux) 
 
-    berryIMU.tiltCheck()
+    # berryIMU.tiltCheck()
 
     # Print the sensor readings to console for logging purposes
     print("=====")
