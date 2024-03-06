@@ -22,17 +22,28 @@ from requests import get
 import urllib.request
 import berryIMU
 
+local_ip = ''
+external_ip = ''
+
 # Obtain the local and public IP address of the Pi + print to console 
-cmd = "hostname -I | cut -d' ' -f1"
-local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
-print("Local IP: " + local_ip)
-external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-print("Public IP: " + str(external_ip))
+def getIP():
+    global local_ip
+    global external_ip
+
+    cmd = "hostname -I | cut -d' ' -f1"
+    local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
+    print("Local IP: " + local_ip)
+    external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+    print("Public IP: " + str(external_ip))
+    update_firebase_ip(external_ip)
+    display_ip()
 
 # Push the IP to Firebase
 # If we are using eduroam we can use this IP to log in remotely
 def update_firebase_ip(IP):
     update_firebase_scale("Public IP", str(IP))
+
+getIP()
 
 # Degree sign const for easy use later on
 degree_sign = u'\N{DEGREE SIGN}'
@@ -202,7 +213,6 @@ containerDict["Container_2"] = container("Container_2", get_initial_mass("Contai
 containerDict["Container_3"] = container("Container_3", get_initial_mass("Container_3"), 0)
 containerDict["Container_4"] = container("Container_4", get_initial_mass("Container_4"), 0)
 
-
 def zero_channel():
     """Initiate internal calibration for current channel.Use when scale is started,
     a new channel is selected, or to adjust for measurement drift. Remove weight
@@ -233,7 +243,6 @@ def calibrate_weight_sensor():
     global gain
     # Prompt the user to press enter when the sensor is empty
     print("Please remove all objects from the scale and press enter.")
-    display_message("Please remove all", "objects from the scale")
     input()
 
     # Read the value of the sensor when empty
@@ -255,12 +264,6 @@ def calibrate_weight_sensor():
     print("Please remove all objects from the scale within the next 5 seconds.")
     time.sleep(5)
     print("Calibration complete!")
-
-# this defines the path that openCV frames will be stored to, this is used for debugging purposes
-path = './OpenCVImages'
-
-# Instantiate the camera device
-# cap = cv2.VideoCapture(0)
 
 # Instantiate 24-bit load sensor ADC, one channel with default gain of 128
 nau7802 = NAU7802(board.I2C(), address=0x2A, active_channels=1)
@@ -462,8 +465,6 @@ def display_ip():
     disp.image(image)
     disp.show()
     time.sleep(2)
-
-display_ip()
 
 ### Main loop
 while True:
