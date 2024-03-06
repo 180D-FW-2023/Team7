@@ -318,6 +318,18 @@ presentContainers = {
   "Container_4": False
 }
 
+""" Display the IP address on the OLED """
+def display_ip():
+    draw.text((x, top + 0),  "Local IP", font=font, fill=255)
+    draw.text((x, top + 8),  local_ip, font=font, fill=255)
+    draw.text((x, top + 16),  "External IP", font=font, fill=255)
+    draw.text((x, top + 25),  external_ip, font=font, fill=255)
+    disp.image(image)
+    disp.show()
+    time.sleep(2)
+
+
+
 # Obtain the local and public IP address of the Pi + print to console 
 def getIP():
     global local_ip
@@ -456,16 +468,6 @@ def display_message(line1, line2):
     disp.image(image)
     disp.show()
     time.sleep(0.1)
-
-""" Display the IP address on the OLED """
-def display_ip():
-    draw.text((x, top + 0),  "Local IP", font=font, fill=255)
-    draw.text((x, top + 8),  local_ip, font=font, fill=255)
-    draw.text((x, top + 16),  "External IP", font=font, fill=255)
-    draw.text((x, top + 25),  external_ip, font=font, fill=255)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
 
 ### Main loop
 while True:
