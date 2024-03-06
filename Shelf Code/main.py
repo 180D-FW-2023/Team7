@@ -42,7 +42,8 @@ firebase_admin.initialize_app(cred, {
 
 # Be sure to update this line for other scales
 # i.e. ref = db.reference("/Scale_2/")
-ref = db.reference("/Scale_1/")
+scale_id = "/Scale_1/"
+ref = db.reference(scale_id)
 
 # update_firebase_container(Container Name, Parameter to Update, Value to Update to)
 # Example usage update_firebase_container("Container_1", "Current Mass", val) 
@@ -71,7 +72,7 @@ def get_initial_mass(container):
 # This is set in the UI
 def get_name(container):
     # Get a database reference to our posts
-    name = db.reference("/Scale_1/" + container + "/Container Name" )
+    name = db.reference(scale_id + container + "/Container Name" )
     return name.get()
 
 # Push the IP 
@@ -327,8 +328,6 @@ def display_ip():
     disp.image(image)
     disp.show()
     time.sleep(2)
-
-
 
 # Obtain the local and public IP address of the Pi + print to console 
 def getIP():
