@@ -16,7 +16,7 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 
   
 # read the image file 
-img = cv2.imread('campus_logo.jpg', 2) 
+img = cv2.imread('campus-logo.jpeg', 2) 
 
 # Resize the image adding black boarders on the outside
 # Screen resolution 
