@@ -1,6 +1,7 @@
 # Requirements for the image conversion
 import cv2 
 import numpy as np
+import random
 
 # Requirements for the display 
 from board import SCL, SDA, D4
@@ -15,7 +16,8 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 
   
 # read the image file 
-img = cv2.imread('pokemon.png', 2) 
+files = ["pokemon.png", "UCLA.jpeg", "pikachu.jpg"]
+img = cv2.imread(files[random.randint(0, 2)], 2) 
 
 # Resize the image adding black boarders on the outside
 # Screen resolution 
