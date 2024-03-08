@@ -16,7 +16,7 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 
   
 # read the image file 
-img = cv2.imread('pikachu_test.jpg', 2) 
+img = cv2.imread('campus_logo.jpg', 2) 
 
 # Resize the image adding black boarders on the outside
 # Screen resolution 
@@ -65,10 +65,4 @@ display.show()
 for x in range(128):
     for y in range(32):
         display.pixel(x,y,pixels[y,x])
-# # Set a pixel in the origin 0,0 position.
-# display.pixel(0, 0, 1)
-# # Set a pixel in the middle 64, 16 position.
-# display.pixel(64, 16, 1)
-# # Set a pixel in the opposite 127, 31 position.
-# display.pixel(127, 31, 1)
 display.show()
