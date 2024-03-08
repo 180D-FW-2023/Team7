@@ -29,10 +29,10 @@ display.fill(0)
 
 display.show()
 
-# Set a pixel in the origin 0,0 position.
+# Set a pixel in the origin 0,0 position (top left)
 display.pixel(0, 0, 1)
-# Set a pixel in the middle 64, 16 position.
+# Set a pixel in the middle 64, 16 position (dead middle)
 display.pixel(64, 16, 1)
-# Set a pixel in the opposite 127, 31 position.
-# display.pixel(127, 31, 1)
+# Set a pixel in the opposite 127, 31 position (bottom right)
+display.pixel(127, 31, 1)
 display.show()
