@@ -64,7 +64,7 @@ display.show()
 
 for x in range(128):
     for y in range(32):
-        display.pixel(x,y,pixels[x,y])
+        display.pixel(x,y,pixels[y,x])
 # # Set a pixel in the origin 0,0 position.
 # display.pixel(0, 0, 1)
 # # Set a pixel in the middle 64, 16 position.
