@@ -91,12 +91,10 @@ print("SSD1305 DISPLAY READY")
 
 path = "Easter Egg Movies"
 movie_list = os.listdir(path)
-print("Movies in ", path, ":")
+print("Movies in ", path, " Folder:")
 print(movie_list)
 
 def easterEgg():
-
-
     randomMovie = movie_list[random.randint(0, len(movie_list) - 1)]
     print ("Now Playing: " + randomMovie.split('.')[0])
     display_message("Now Playing: ", randomMovie.split('.')[0])
