@@ -89,7 +89,7 @@ def display_countdown_message(line1 = "", line2 = "", line3 ="", amountOfTime = 
 
 print("SSD1305 DISPLAY READY")
 
-path = "/easterEggMovies"
+path = "\easterEggMovies"
 dir_list = os.listdir(path)
 print("Files and directories in '", path, "' :")
 # prints all files
