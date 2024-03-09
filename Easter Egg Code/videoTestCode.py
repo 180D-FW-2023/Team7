@@ -2,6 +2,7 @@
 import cv2
 import numpy as np
 import time
+import random
  
 # Requirements for the display 
 from board import SCL, SDA, D4
@@ -15,17 +16,21 @@ i2c = busio.I2C(SCL, SDA)
 display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset)
 
   
+files = ["PhantomMenace.mp4", "ReturnoftheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
+
+# Creating a VideoCapture object to read the video, picks one of the 4 movies
+cap = cv2.VideoCapture(files[random.randint(0, 3)])
 
 
-# Creating a VideoCapture object to read the video
-cap = cv2.VideoCapture('PhantomMenace.mp4')
- 
- 
 # Loop until the end of the video
 while (cap.isOpened()):
  
     # Capture frame-by-frame
     ret, frame = cap.read()
+
+    # If we reach the end of the movie
+    if not ret:
+        break 
 
     # # Display the current frame
     # cv2.imshow('Frame', frame)
