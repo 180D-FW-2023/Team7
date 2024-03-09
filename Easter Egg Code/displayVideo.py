@@ -36,7 +36,7 @@ while (cap.isOpened()):
     if not ret:
         break 
 
-    # # Display the current frame
+    ## Display the current frame
     # cv2.imshow('Frame', frame)
  
     # Resize so it fits on our display
@@ -48,7 +48,7 @@ while (cap.isOpened()):
     # Converting to its binary form 
     ret, bw_img = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY) 
   
-    # # Display the binary resized frame
+    ## Display the binary resized frame
     # cv2.imshow("Binary", bw_img) 
 
     # Clear the previous image
@@ -60,9 +60,13 @@ while (cap.isOpened()):
         for j in range(displayHeight):
             if (bw_img[j,i]): # Black pixels will be 0 (false)
                 display.pixel(i,j,1)
+
+    # Show the image
     display.show()
 
+    # Hold the frame on the display for half a second
     time.sleep(.5)
+
     # define q as the exit button
     if cv2.waitKey(25) & 0xFF == ord('q'):
         break
