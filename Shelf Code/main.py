@@ -83,7 +83,7 @@ def display_message(line1 = "", line2 = "", line3 ="", line4 = ""):
     time.sleep(0.1)
 
 def display_countdown_message(line1 = "", line2 = "", line3 ="", amountOfTime = 5):
-    for i in range(amountOfTime):
+    for i in reversed(range(amountOfTime)):
         display_message(line1, line2,  line3, "(" + str(i+1) + ")")
         time.sleep(1)
 
