@@ -272,15 +272,15 @@ def calibrate_weight_sensor():
 
     # Prompt the user to enter the weight in grams of the item they place on the scale
     print("Please place the calibration weight on the scale")
-    display_message("Please place the", "calibration weight on"  "the shelf", "(5)")
+    display_message("Please place the", "calibration weight",  "on the shelf", "(5)")
     time.sleep(1)
-    display_message("Please place the", "calibration weight on"  "the shelf", "(4)")
+    display_message("Please place the", "calibration weight",  "on the shelf", "(4)")
     time.sleep(1)
-    display_message("Please place the", "calibration weight on"  "the shelf", "(3)")
+    display_message("Please place the", "calibration weight",  "on the shelf", "(3)")
     time.sleep(1)
-    display_message("Please place the", "calibration weight on"  "the shelf", "(2)")
+    display_message("Please place the", "calibration weight",  "on the shelf", "(2)")
     time.sleep(1)
-    display_message("Please place the", "calibration weight on"  "the shelf", "(1)")
+    display_message("Please place the", "calibration weight",  "on the shelf", "(1)")
     time.sleep(1)
 
     """ Replace this section with the calibration weight mass """
@@ -338,6 +338,7 @@ empty_weight_reading = read_raw_value(10)
 
 # Tell the user we have zeroed the scale
 display_message("The shelf has", "been zeroed")
+time.sleep(1)
 
 # Check if we have a gain stored in Firebase, if not obtain a new one
 gain = get_scale_gain()
