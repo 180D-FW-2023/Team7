@@ -150,21 +150,19 @@ def easterEgg():
 def display_logo():
     img = cv2.imread("Smart Shelves.png", 2) 
 
-    # Resize so it fits on our display
-    img = cv2.resize(img, (width, height), interpolation = cv2.INTER_LINEAR)
-    # # Resize the image adding black boarders on the outside
-    # # Screen resolution 
-    # IMG_COL = 32 # length of columns 
-    # IMG_ROW = 128 # length of rows
-    # # Resize to fit resolution
-    # border_v = 0
-    # border_h = 0
-    # if (IMG_COL/IMG_ROW) >= (img.shape[0]/img.shape[1]):
-    #     border_v = int((((IMG_COL/IMG_ROW)*img.shape[1])-img.shape[0])/2)
-    # else:
-    #     border_h = int((((IMG_ROW/IMG_COL)*img.shape[0])-img.shape[1])/2)
-    # img = cv2.copyMakeBorder(img, border_v, border_v, border_h, border_h, cv2.BORDER_CONSTANT, 0)
-    # img = cv2.resize(img, (IMG_ROW, IMG_COL))
+    # Resize the image adding black boarders on the outside
+    # Screen resolution 
+    IMG_COL = 32 # length of columns 
+    IMG_ROW = 128 # length of rows
+    # Resize to fit resolution
+    border_v = 0
+    border_h = 0
+    if (IMG_COL/IMG_ROW) >= (img.shape[0]/img.shape[1]):
+        border_v = int((((IMG_COL/IMG_ROW)*img.shape[1])-img.shape[0])/2)
+    else:
+        border_h = int((((IMG_ROW/IMG_COL)*img.shape[0])-img.shape[1])/2)
+    img = cv2.copyMakeBorder(img, border_v, border_v, border_h, border_h, cv2.BORDER_CONSTANT, 0)
+    img = cv2.resize(img, (IMG_ROW, IMG_COL))
 
     # Use the cvtColor() function to grayscale the image 
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
