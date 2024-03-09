@@ -147,6 +147,43 @@ def easterEgg():
     print("Thanks for watching!")
     display_message("Thanks for", "watching!")
 
+def display_logo():
+    img = cv2.imread("Smart Shelves.png", 2) 
+
+    # Convert to gray scale
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+
+    # Resize the image adding black boarders on the outside
+    # Screen resolution 
+    IMG_COL = 32 # length of columns 
+    IMG_ROW = 128 # length of rows
+    # Resize to fit resolution
+    border_v = 0
+    border_h = 0
+    if (IMG_COL/IMG_ROW) >= (img.shape[0]/img.shape[1]):
+        border_v = int((((IMG_COL/IMG_ROW)*img.shape[1])-img.shape[0])/2)
+    else:
+        border_h = int((((IMG_ROW/IMG_COL)*img.shape[0])-img.shape[1])/2)
+    img = cv2.copyMakeBorder(img, border_v, border_v, border_h, border_h, cv2.BORDER_CONSTANT, 0)
+    img = cv2.resize(img, (IMG_ROW, IMG_COL))
+
+    # Use the cvtColor() function to grayscale the image 
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
+    
+    # Converting to its binary form 
+    ret, bw_img = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY) 
+    disp.fill(0)
+    # Traverse the image, if the value is 0 (black) do nothing, 
+    #                     if it is 255 (white) set the pixel to white
+    for i in range(width):
+        for j in range(height):
+            if (bw_img[j,i]): # Black pixels will be 0 (false)
+                disp.pixel(i,j,1)
+    # Show the image
+    disp.show()
+
+display_logo()
+
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('ece-180-project-firebase-adminsdk-7eg04-74b6c29e0b.json')
 #                               ^ DO NOT PUSH THIS JSON FILE TO GITHUB, CONTAINS ACCESS TOKENS!!!
@@ -202,7 +239,6 @@ print("Public IP: " + str(external_ip))
 update_firebase_scale("External IP", str(external_ip))
 update_firebase_scale("Local IP", str(local_ip))
 display_message("Local IP", local_ip, "External IP", external_ip)
-time.sleep(2)
 
 # define the variables that will store information, all are floats
 loadCellMass = gain = 0.0 # Used for NAU7802 (ADC)
@@ -541,7 +577,7 @@ while True:
     # CASE 2: DECREASE IN MASS
     elif (abs(differenceInMass) > thresholdMass):
         # wait one second so the QR is out of the frame 
-        time.sleep(1)
+        time.sleep(.5)
 
         # Tell the user we are searching for a container that was removed
         display_message("Determining what was", "removed...")
