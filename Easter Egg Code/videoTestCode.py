@@ -34,10 +34,10 @@ while (cap.isOpened()):
     frame = cv2.resize(frame, (128, 32), interpolation = cv2.INTER_LINEAR)
     
     # Use the cvtColor() function to grayscale the image 
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
   
     # Converting to its binary form 
-    ret, bw_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) 
+    ret, bw_img = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY) 
   
     # # Display the binary resized frame
     # cv2.imshow("Binary", bw_img) 
