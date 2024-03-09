@@ -19,7 +19,9 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 files = ["PhantomMenace.mp4", "ReturnoftheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
 
 # Creating a VideoCapture object to read the video, picks one of the 4 movies
-cap = cv2.VideoCapture(files[random.randint(0, 3)])
+randomVideo = files[random.randint(0, 3)]
+print ("Now Playing: " + str(randomVideo))
+cap = cv2.VideoCapture(randomVideo)
 
 
 # Loop until the end of the video
