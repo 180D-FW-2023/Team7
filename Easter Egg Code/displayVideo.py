@@ -1,6 +1,5 @@
 # importing the necessary libraries
 import cv2
-import numpy as np
 import time
 import random
  
@@ -16,11 +15,8 @@ i2c = busio.I2C(SCL, SDA)
 display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset)
 
 # Get our display dimensions
-displayWidth = display.width
-displayHeight = display.height
-
-print("Width: " + str(displayWidth))
-print("Height: " + str(displayHeight))
+displayWidth = display.width # 128 in this case
+displayHeight = display.height # 32 in this case 
 
 # Files for the code to choose from 
 files = ["PhantomMenace.mp4", "ReturnOfTheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
@@ -44,7 +40,7 @@ while (cap.isOpened()):
     # cv2.imshow('Frame', frame)
  
     # Resize so it fits on our display
-    frame = cv2.resize(frame, (128, 32), interpolation = cv2.INTER_LINEAR)
+    frame = cv2.resize(frame, (displayWidth, displayHeight), interpolation = cv2.INTER_LINEAR)
     
     # Use the cvtColor() function to grayscale the image 
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
@@ -60,8 +56,8 @@ while (cap.isOpened()):
 
     # Traverse the image, if the value is 0 (black) do nothing, 
     #                     if it is 255 (white) set the pixel to white
-    for i in range(128):
-        for j in range(32):
+    for i in range(displayWidth):
+        for j in range(displayHeight):
             if (bw_img[j,i]): # Black pixels will be 0 (false)
                 display.pixel(i,j,1)
     display.show()
