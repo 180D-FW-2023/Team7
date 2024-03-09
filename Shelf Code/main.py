@@ -101,8 +101,8 @@ def easterEgg():
     time.sleep(1)
     cap = cv2.VideoCapture("Easter Egg Movies/" + str(randomMovie))
 
-    # Loop until the end of the video
-    while (cap.isOpened()):
+    # Loop until the end of the video and while the toggle is on
+    while (cap.isOpened() and get_easter_egg_status()):
     
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -174,6 +174,10 @@ def update_firebase_scale(parameter, updated_value):
 # Pull the scale's gain from Firebase, returns a float
 def get_scale_gain():
 	return ref.child("Scale Gain").get()
+
+def get_easter_egg_status():
+    return ref.child("Easter Egg Toggle").get()
+
 
 # Pull the last known initial mass from Firebase
 # If it is zero we register a new mass
@@ -498,7 +502,9 @@ def update_display():
 
 ### Main loop
 while True:
-
+    if get_easter_egg_status():
+        easterEgg()
+        
     getSensorReadings()
     update_display()
     avgOfPrevMasses = sum(prevMasses) / len(prevMasses)
