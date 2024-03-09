@@ -101,7 +101,7 @@ def easterEgg():
     print ("Now Playing: " + randomMovie.split('.')[0])
     display_message("Now Playing: ", randomMovie.split('.')[0])
     time.sleep(1)
-    cap = cv2.VideoCapture(randomMovie)
+    cap = cv2.VideoCapture("/Easter Egg Movies/" + str(randomMovie))
 
     # Loop until the end of the video
     while (cap.isOpened()):
