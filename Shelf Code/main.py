@@ -175,7 +175,7 @@ def get_scale_gain():
 	return ref.child("Scale Gain").get()
 
 def get_easter_egg_status():
-    return ref.child("Easter Egg Toggle").get()
+    return db.reference("Easter Egg").child("Toggle").get()
 
 
 # Pull the last known initial mass from Firebase
@@ -342,7 +342,8 @@ def calibrate_weight_sensor():
     display_countdown_message("Please place the","calibration weight", "on the shelf", 5)
 
     """ Replace this section with the calibration weight mass """
-    item_weight = float(input("Enter the weight of the item in grams: "))
+    # item_weight = float(input("Enter the weight of the item in grams: "))
+    item_weight = 200 # grams
 
     # Read the value of the sensor with the item on it
     item_weight_reading = read_raw_value()
@@ -526,7 +527,7 @@ while True:
 
         # Tell the user we determined what container it was
         display_message(get_name(newContainer),  "was put back!")
-        time.sleep(1)
+        time.sleep(.5)
 
         # Get a settled reading from the scale
         getSensorReadings()
@@ -553,7 +554,7 @@ while True:
 
         # Notify the user we found the container that was removed
         display_message(get_name(removedContainer), "was removed!")
-        time.sleep(1)
+        time.sleep(.5)
 
         # Make all the prevMasses the current mass so the next iteration doesn't think there was a change
         prevMasses = [loadCellMass, loadCellMass, loadCellMass, loadCellMass, loadCellMass]
