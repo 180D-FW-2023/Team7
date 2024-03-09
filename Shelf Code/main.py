@@ -238,7 +238,7 @@ external_ip = urllib.request.urlopen('https://4.ident.me').read().decode('utf8')
 print("Public IP: " + str(external_ip))
 update_firebase_scale("External IP", str(external_ip))
 update_firebase_scale("Local IP", str(local_ip))
-display_message("Local IP", local_ip, "External IP", external_ip)
+# display_message("Local IP", local_ip, "External IP", external_ip)
 
 # define the variables that will store information, all are floats
 loadCellMass = gain = 0.0 # Used for NAU7802 (ADC)
