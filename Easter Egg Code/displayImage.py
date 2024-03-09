@@ -15,13 +15,12 @@ i2c = busio.I2C(SCL, SDA)
 display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset)
 
   
-# read the image file 
-files = ["pokemon.png", "UCLA.jpeg", "pikachu.jpg"]
-img = cv2.imread(files[random.randint(0, 2)], 2) 
+# Read the image file 
+files = [*** PUT IMAGE FILE NAMES HERE ***]
+img = cv2.imread(files[random.randint(0, len(files) - 1)], 2) 
 
-# convert to gray scale
+# Convert to gray scale
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
-
 
 # Resize the image adding black boarders on the outside
 # Screen resolution 
@@ -36,13 +35,11 @@ else:
     border_h = int((((IMG_ROW/IMG_COL)*img.shape[0])-img.shape[1])/2)
 img = cv2.copyMakeBorder(img, border_v, border_v, border_h, border_h, cv2.BORDER_CONSTANT, 0)
 img = cv2.resize(img, (IMG_ROW, IMG_COL))
-  
+
+# Convert to binary (this must be in gray scale)
 ret, bw_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) 
-  
 
-# Convert to binary 
-bw = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) 
-
+## Uncomment if testing on a computer
 # cv2.imshow("Binary", bw_img) 
 # cv2.waitKey(0) 
 # cv2.destroyAllWindows() 
@@ -63,9 +60,6 @@ pixels[pixels == 255] = 1
 # Clear the display.  Always call show after changing pixels to make the display
 # update visible!
 display.fill(0)
-
-display.show()
-
 
 for i in range(IMG_ROW):
     for j in range(IMG_COL):

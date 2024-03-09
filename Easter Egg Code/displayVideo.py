@@ -15,14 +15,13 @@ oled_reset = digitalio.DigitalInOut(D4)
 i2c = busio.I2C(SCL, SDA)
 display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset)
 
-  
-files = ["PhantomMenace.mp4", "ReturnoftheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
+# Files for the code to choose from 
+files = ["PhantomMenace.mp4", "ReturnOfTheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
 
 # Creating a VideoCapture object to read the video, picks one of the 4 movies
-randomVideo = files[random.randint(0, 3)]
+randomVideo = files[random.randint(0, len(files) - 1)]
 print ("Now Playing: " + str(randomVideo))
 cap = cv2.VideoCapture(randomVideo)
-
 
 # Loop until the end of the video
 while (cap.isOpened()):
@@ -49,21 +48,24 @@ while (cap.isOpened()):
     # # Display the binary resized frame
     # cv2.imshow("Binary", bw_img) 
 
-    # initializes a 32 by 128 array matrix all with 0's
-    pixels =  np.zeros((32, 128))
-    # print("Creating 2D empty list of zeros: ", pixels)
+    # # initializes a 32 by 128 array matrix all with 0's
+    # pixels =  np.zeros((32, 128))
 
-    for x in range(32):
-        pixels[x,:] = bw_img[x, :]
+    # for x in range(32):
+    #     pixels[x,:] = bw_img[x, :]
 
-    # Convert all the white pixels to 1
-    pixels[pixels == 255] = 1
+    # # Convert all the white pixels to 1
+    # pixels[pixels == 255] = 1
 
+    # Clear the previous image
     display.fill(0)
 
     for i in range(128):
         for j in range(32):
-            display.pixel(i,j,pixels[j,i])
+            if (not bw_img[j,i]):
+                display.pixel(i,j,0)
+            else:
+                display.pixel(i,j,1)
     display.show()
 
     time.sleep(.5)
@@ -73,5 +75,8 @@ while (cap.isOpened()):
  
 # release the video capture object
 cap.release()
+
 # # Closes all the windows currently opened.
 # cv2.destroyAllWindows()
+
+print("Thanks for watching!")
