@@ -23,7 +23,7 @@ files = ["PhantomMenace.mp4", "ReturnOfTheJedi.gif", "NewHope.gif", "EmpireStrik
 
 # Creating a VideoCapture object to read the video, picks one of the 4 movies
 randomVideo = files[random.randint(0, len(files) - 1)]
-print ("Now Playing: " + str(randomVideo))
+print ("Now Playing: " + str(randomVideo).split('.')[0])
 cap = cv2.VideoCapture(randomVideo)
 
 # Loop until the end of the video
