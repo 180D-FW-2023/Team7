@@ -154,22 +154,7 @@ def display_logo():
     files = ["Smart Shelves.png"]
     img = cv2.imread(files[random.randint(0, len(files) - 1)], 2)   
 
-    # # Convert to gray scale
-    # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   
-
-    # Resize the image adding black boarders on the outside
-    # Screen resolution 
-    IMG_COL = 32 # length of columns 
-    IMG_ROW = 128 # length of rows
-    # Resize to fit resolution
-    border_v = 0
-    border_h = 0
-    if (IMG_COL/IMG_ROW) >= (img.shape[0]/img.shape[1]):
-        border_v = int((((IMG_COL/IMG_ROW)*img.shape[1])-img.shape[0])/2)
-    else:
-        border_h = int((((IMG_ROW/IMG_COL)*img.shape[0])-img.shape[1])/2)
-    img = cv2.copyMakeBorder(img, border_v, border_v, border_h, border_h, cv2.BORDER_CONSTANT, 0)
-    img = cv2.resize(img, (IMG_ROW, IMG_COL))   
+    img = cv2.resize(img, (width, height), interpolation = cv2.INTER_LINEAR)
 
     # Convert to binary (this must be in gray scale)
     ret, bw_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) 
