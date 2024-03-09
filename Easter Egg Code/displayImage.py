@@ -16,7 +16,7 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 
   
 # Read the image file 
-files = [*** PUT IMAGE FILE NAMES HERE ***]
+files = ["Smart Shelves.png"]
 img = cv2.imread(files[random.randint(0, len(files) - 1)], 2) 
 
 # Convert to gray scale
