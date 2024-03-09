@@ -19,6 +19,10 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 files = ["pokemon.png", "UCLA.jpeg", "pikachu.jpg"]
 img = cv2.imread(files[random.randint(0, 2)], 2) 
 
+# convert to gray scale
+img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+
+
 # Resize the image adding black boarders on the outside
 # Screen resolution 
 IMG_COL = 32 # length of columns 
@@ -44,7 +48,7 @@ bw = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
 # cv2.destroyAllWindows() 
 
 # initializes a 32 by 128 array matrix all with 0's
-pixels =  np.zeros((32, 128))
+pixels =  np.zeros((IMG_COL, IMG_ROW))
 # print("Creating 2D empty list of zeros: ", pixels)
 
 for x in range(IMG_COL):
@@ -63,7 +67,7 @@ display.fill(0)
 display.show()
 
 
-for x in range(128):
-    for y in range(32):
-        display.pixel(x,y,pixels[y,x])
+for i in range(IMG_ROW):
+    for j in range(IMG_COL):
+        display.pixel(i,j,pixels[j,i])
 display.show()
