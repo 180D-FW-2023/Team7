@@ -143,9 +143,6 @@ def easterEgg():
     # release the video capture object
     cap.release()
 
-    # # Closes all the windows currently opened.
-    # cv2.destroyAllWindows()
-
     print("Thanks for watching!")
     display_message("Thanks for", "watching!")
 
