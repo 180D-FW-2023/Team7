@@ -148,15 +148,12 @@ def easterEgg():
     display_message("Thanks for", "watching!")
 
 def display_logo():
-    img = cv2.imread("Smart Shelves.png", 2) 
 
-    # Read the image file 
-    files = ["Smart Shelves.png"]
-    img = cv2.imread(files[random.randint(0, len(files) - 1)], 2)   
+    img = cv2.imread("Smart Shelves.png", 2) 
 
     img = cv2.resize(img, (width, height), interpolation = cv2.INTER_LINEAR)
 
-    # Convert to binary (this must be in gray scale)
+    # Convert to binary
     ret, bw_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) 
     disp.fill(0)
     # Traverse the image, if the value is 0 (black) do nothing, 
