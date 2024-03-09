@@ -19,8 +19,8 @@ display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset
 files = ["Smart Shelves.png"]
 img = cv2.imread(files[random.randint(0, len(files) - 1)], 2) 
 
-# Convert to gray scale
-img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
+# # Convert to gray scale
+# img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 
 # Resize the image adding black boarders on the outside
 # Screen resolution 
