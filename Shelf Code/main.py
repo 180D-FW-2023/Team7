@@ -82,6 +82,11 @@ def display_message(line1 = "", line2 = "", line3 ="", line4 = ""):
     disp.show()
     time.sleep(0.1)
 
+def display_countdown_message(line1 = "", line2 = "", line3 ="", time = 5):
+    for i in range(5)
+        display_message(line1, line2,  line3, "(" + str(i+1) + ")")
+        time.sleep(1)
+
 print("SSD1305 DISPLAY READY")
 
 # Fetch the service account key JSON file contents
@@ -272,16 +277,7 @@ def calibrate_weight_sensor():
 
     # Prompt the user to enter the weight in grams of the item they place on the scale
     print("Please place the calibration weight on the scale")
-    display_message("Please place the", "calibration weight",  "on the shelf", "(5)")
-    time.sleep(1)
-    display_message("Please place the", "calibration weight",  "on the shelf", "(4)")
-    time.sleep(1)
-    display_message("Please place the", "calibration weight",  "on the shelf", "(3)")
-    time.sleep(1)
-    display_message("Please place the", "calibration weight",  "on the shelf", "(2)")
-    time.sleep(1)
-    display_message("Please place the", "calibration weight",  "on the shelf", "(1)")
-    time.sleep(1)
+    display_countdown_message("Please place the","calibration weight", "on the shelf", 5)
 
     """ Replace this section with the calibration weight mass """
     item_weight = float(input("Enter the weight of the item in grams: "))
@@ -295,16 +291,7 @@ def calibrate_weight_sensor():
     # Print the calibration parameters
     print("Scale Gain:", gain)
     update_firebase_scale("Scale Gain", gain)
-    display_message("Remove all items", "from the shelf", "(5)")
-    time.sleep(1)
-    display_message("Remove all items", "from the shelf", "(4)")
-    time.sleep(1)
-    display_message("Remove all items", "from the shelf", "(3)")
-    time.sleep(1)
-    display_message("Remove all items", "from the shelf", "(2)")
-    time.sleep(1)
-    display_message("Remove all items", "from the shelf", "(1)")
-    time.sleep(1)
+    display_countdown_message("Remove all items","from the shelf", "", 5)
     display_message("Calibration", "Completed!")
     print("Calibration completed!")
 
@@ -318,16 +305,7 @@ enabled = nau7802.enable(True)
 print("Digital and analog power enabled:", enabled)
 
 print("REMOVE WEIGHTS FROM LOAD CELLS")
-display_message("Remove all items", "from the shelf", "(5)")
-time.sleep(1)
-display_message("Remove all items", "from the shelf", "(4)")
-time.sleep(1)
-display_message("Remove all items", "from the shelf", "(3)")
-time.sleep(1)
-display_message("Remove all items", "from the shelf", "(2)")
-time.sleep(1)
-display_message("Remove all items", "from the shelf", "(1)")
-time.sleep(1)
+display_countdown_message("Remove all items","from the shelf", "", 5)
 
 # Calibrate and zero channel
 nau7802.channel = 1
