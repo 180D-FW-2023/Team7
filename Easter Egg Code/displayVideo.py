@@ -19,9 +19,10 @@ displayWidth = display.width # 128 in this case
 displayHeight = display.height # 32 in this case 
 
 # Files for the code to choose from 
-files = ["PhantomMenace.mp4", "ReturnOfTheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
+files = ["Phantom Menace.mp4", "Return Of The Jedi.gif", "New Hope.gif", "Empire Strikes Back.gif"]
 
-# Creating a VideoCapture object to read the video, picks one of the 4 movies
+# Creating a VideoCapture object to read the video, picks one of the movies
+# Also prints what movie is playing (removes file extension)
 randomVideo = files[random.randint(0, len(files) - 1)]
 print ("Now Playing: " + randomVideo.split('.')[0])
 cap = cv2.VideoCapture(randomVideo)
