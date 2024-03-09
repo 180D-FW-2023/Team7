@@ -96,6 +96,7 @@ print(movie_list)
 
 def easterEgg():
     randomMovie = movie_list[random.randint(0, len(movie_list) - 1)]
+    print("=====")
     print ("Now Playing: " + randomMovie.split('.')[0])
     display_message("Now Playing: ", randomMovie.split('.')[0])
     time.sleep(1)
