@@ -54,8 +54,6 @@ while (cap.isOpened()):
 
     display.fill(0)
 
-    display.show()
-
     for i in range(128):
         for j in range(32):
             display.pixel(i,j,pixels[j,i])
