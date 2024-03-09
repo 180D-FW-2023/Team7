@@ -15,6 +15,13 @@ oled_reset = digitalio.DigitalInOut(D4)
 i2c = busio.I2C(SCL, SDA)
 display = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, addr=0x3C, reset=oled_reset)
 
+# Get our display dimensions
+displayWidth = display.width
+displayHeight = display.height
+
+print("Width: " + str(displayWidth))
+print("Height: " + str(displayHeight))
+
 # Files for the code to choose from 
 files = ["PhantomMenace.mp4", "ReturnOfTheJedi.gif", "NewHope.gif", "EmpireStrikesBack.gif"]
 
