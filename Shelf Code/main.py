@@ -89,14 +89,69 @@ def display_countdown_message(line1 = "", line2 = "", line3 ="", amountOfTime = 
 
 print("SSD1305 DISPLAY READY")
 
-path = "easterEggMovies"
+path = "Easter Egg Movies"
 move_list = os.listdir(path)
 print("Movies in ", path, ":")
 print(move_list)
 
-randomVideo = move_list[random.randint(0, len(move_list) - 1)]
-print ("Now Playing: " + randomVideo.split('.')[0])
-# cap = cv2.VideoCapture(randomVideo)
+def easterEgg():
+
+
+    randomMovie = move_list[random.randint(0, len(move_list) - 1)]
+    print ("Now Playing: " + randomMovie.split('.')[0])
+    display_message("Now Playing: ", randomMovie.split('.')[0])
+    time.sleep(1)
+    cap = cv2.VideoCapture(randomMovie)
+
+    # Loop until the end of the video
+    while (cap.isOpened()):
+    
+        # Capture frame-by-frame
+        ret, frame = cap.read()
+
+        # If we reach the end of the movie
+        if not ret:
+            break 
+    
+        # Resize so it fits on our display
+        frame = cv2.resize(frame, (width, height), interpolation = cv2.INTER_LINEAR)
+
+        # Use the cvtColor() function to grayscale the image 
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
+    
+        # Converting to its binary form 
+        ret, bw_img = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY) 
+
+        # Clear the previous image
+        disp.fill(0)
+
+        # Traverse the image, if the value is 0 (black) do nothing, 
+        #                     if it is 255 (white) set the pixel to white
+        for i in range(width):
+            for j in range(height):
+                if (bw_img[j,i]): # Black pixels will be 0 (false)
+                    disp.pixel(i,j,1)
+
+        # Show the image
+        disp.show()
+
+        # Hold the frame on the display for half a second
+        time.sleep(.5)
+
+        # define q as the exit button
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
+        
+    # release the video capture object
+    cap.release()
+
+    # # Closes all the windows currently opened.
+    # cv2.destroyAllWindows()
+
+    print("Thanks for watching!")
+    display_message("Thanks for", "watching!")
+
+easterEgg()
 
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('ece-180-project-firebase-adminsdk-7eg04-74b6c29e0b.json')
