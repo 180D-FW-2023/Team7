@@ -150,6 +150,13 @@ def easterEgg():
 def display_logo():
     img = cv2.imread("Smart Shelves.png", 2) 
 
+    # Read the image file 
+    files = ["Smart Shelves.png"]
+    img = cv2.imread(files[random.randint(0, len(files) - 1)], 2)   
+
+    # # Convert to gray scale
+    # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)   
+
     # Resize the image adding black boarders on the outside
     # Screen resolution 
     IMG_COL = 32 # length of columns 
@@ -162,13 +169,10 @@ def display_logo():
     else:
         border_h = int((((IMG_ROW/IMG_COL)*img.shape[0])-img.shape[1])/2)
     img = cv2.copyMakeBorder(img, border_v, border_v, border_h, border_h, cv2.BORDER_CONSTANT, 0)
-    img = cv2.resize(img, (IMG_ROW, IMG_COL))
+    img = cv2.resize(img, (IMG_ROW, IMG_COL))   
 
-    # Use the cvtColor() function to grayscale the image 
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY) 
-    
-    # Converting to its binary form 
-    ret, bw_img = cv2.threshold(frame, 127, 255, cv2.THRESH_BINARY) 
+    # Convert to binary (this must be in gray scale)
+    ret, bw_img = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY) 
     disp.fill(0)
     # Traverse the image, if the value is 0 (black) do nothing, 
     #                     if it is 255 (white) set the pixel to white
