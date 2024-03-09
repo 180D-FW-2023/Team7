@@ -126,7 +126,7 @@ def get_name(container):
     name = db.reference(scale_id + container + "/Container Name" )
     return name.get()
 
-"""" Obtain the local and public IP address of the Pi + print to console + display """"
+"""" Obtain the local and public IP address of the Pi + print to console + display """
 cmd = "hostname -I | cut -d' ' -f1"
 local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
 print("Local IP: " + local_ip)
