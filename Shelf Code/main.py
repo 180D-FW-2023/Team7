@@ -90,12 +90,13 @@ def display_countdown_message(line1 = "", line2 = "", line3 ="", amountOfTime = 
 print("SSD1305 DISPLAY READY")
 
 path = "easterEggMovies"
-dir_list = os.listdir(path)
-print("Files and directories in '", path, "' :")
-# prints all files
-print(dir_list)
+move_list = os.listdir(path)
+print("Movies in ", path, ":")
+print(move_list)
 
-
+randomVideo = move_list[random.randint(0, len(move_list) - 1)]
+print ("Now Playing: " + randomVideo.split('.')[0])
+# cap = cv2.VideoCapture(randomVideo)
 
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('ece-180-project-firebase-adminsdk-7eg04-74b6c29e0b.json')
