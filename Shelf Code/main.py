@@ -90,14 +90,14 @@ def display_countdown_message(line1 = "", line2 = "", line3 ="", amountOfTime = 
 print("SSD1305 DISPLAY READY")
 
 path = "Easter Egg Movies"
-move_list = os.listdir(path)
+movie_list = os.listdir(path)
 print("Movies in ", path, ":")
 print(move_list)
 
 def easterEgg():
 
 
-    randomMovie = move_list[random.randint(0, len(move_list) - 1)]
+    randomMovie = movie_list[random.randint(0, len(movie_list) - 1)]
     print ("Now Playing: " + randomMovie.split('.')[0])
     display_message("Now Playing: ", randomMovie.split('.')[0])
     time.sleep(1)
