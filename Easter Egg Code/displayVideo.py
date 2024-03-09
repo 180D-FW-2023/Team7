@@ -48,23 +48,14 @@ while (cap.isOpened()):
     # # Display the binary resized frame
     # cv2.imshow("Binary", bw_img) 
 
-    # # initializes a 32 by 128 array matrix all with 0's
-    # pixels =  np.zeros((32, 128))
-
-    # for x in range(32):
-    #     pixels[x,:] = bw_img[x, :]
-
-    # # Convert all the white pixels to 1
-    # pixels[pixels == 255] = 1
-
     # Clear the previous image
     display.fill(0)
 
+    # Traverse the image, if the value is 0 (black) do nothing, 
+    #                     if it is 255 (white) set the pixel to white
     for i in range(128):
         for j in range(32):
-            if (not bw_img[j,i]):
-                display.pixel(i,j,0)
-            else:
+            if (bw_img[j,i]): # Black pixels will be 0 (false)
                 display.pixel(i,j,1)
     display.show()
 
