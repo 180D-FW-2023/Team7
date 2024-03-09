@@ -21,15 +21,68 @@ import adafruit_ssd1305
 from requests import get
 import urllib.request
 import berryIMU
+import random
 
-local_ip = ''
-external_ip = ''
+# Be sure to update this line
+# i.e. "/Scale_2/"
+scale_id = "/Scale_1/"
 
 # Degree sign const for easy use later on
 degree_sign = u'\N{DEGREE SIGN}'
 # Tuned to account for small bumps on the scale when placing and removing containers
 # units are grams, +/-1 gram 
 thresholdMass = 27 
+
+# Prepare the display
+i2c = busio.I2C(board.SCL, board.SDA)
+oled_reset = digitalio.DigitalInOut(board.D4)
+disp = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, reset=oled_reset)
+
+# Clear display.
+disp.fill(0)
+disp.show()
+
+# Create blank image for drawing.
+# Make sure to create image with mode '1' for 1-bit color.
+width = disp.width
+height = disp.height
+image = Image.new("1", (width, height))
+
+# Get drawing object to draw on image.
+draw = ImageDraw.Draw(image)
+
+# Draw a black filled box to clear the image.
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
+
+# Draw some shapes.
+# First define some constants to allow easy resizing of shapes.
+padding = -2
+top = padding
+bottom = height - padding
+# Move left to right keeping track of the current x position for drawing shapes.
+x = 0
+
+# Load default font.
+font = ImageFont.load_default()
+
+""" Display status messages on the OLED """
+def display_message(line1 = "", line2 = "", line3 ="", line4 = ""):
+
+    # Draw a black filled box to clear the image.
+    draw.rectangle((0, 0, width, height), outline=0, fill=0)
+
+    # Draw our four lines of text
+    draw.text((x, top + 0),  line1, font=font, fill=255)
+    draw.text((x, top + 8),  line2, font=font, fill=255)
+    draw.text((x, top + 16), line3, font=font, fill=255)
+    draw.text((x, top + 25), line4, font=font, fill=255)
+
+    # Display image.
+    disp.image(image)
+    disp.show()
+    time.sleep(0.1)
+
+print("SSD1305 DISPLAY READY")
 
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('ece-180-project-firebase-adminsdk-7eg04-74b6c29e0b.json')
@@ -40,9 +93,7 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://ece-180-project-default-rtdb.firebaseio.com/'
 })
 
-# Be sure to update this line for other scales
-# i.e. ref = db.reference("/Scale_2/")
-scale_id = "/Scale_1/"
+# Set the database reference, based on the scale_id set above
 ref = db.reference(scale_id)
 
 # update_firebase_container(Container Name, Parameter to Update, Value to Update to)
@@ -65,7 +116,7 @@ def get_scale_gain():
 # If it is less than what we measured, the initial mass = measured mass
 def get_initial_mass(container):
     # Get a database reference to our posts
-    initialMass = db.reference("/Scale_1/" + container + "/Initial Container Mass" )
+    initialMass = db.reference(scale_id + container + "/Initial Container Mass" )
     return initialMass.get()
 
 # Pull the user's set container name from Firebase
@@ -75,23 +126,21 @@ def get_name(container):
     name = db.reference(scale_id + container + "/Container Name" )
     return name.get()
 
-# Push the IP 
-# define the variables that will store information, all are floats
-# NAU7802 (ADC)
-# SHT40 (temp + humidity sensor)
-# LTR390 (UV + LUX sensor)
-loadCellMass = gain = 0.0
-sht_temperature = sht_relative_humidity = 0.0
-ltr_uvi = ltr_lux = 0.0
-# Keep track of the number of OpenCV frames we are storing
-imageCount = 1
+"""" Obtain the local and public IP address of the Pi + print to console + display """"
+cmd = "hostname -I | cut -d' ' -f1"
+local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
+print("Local IP: " + local_ip)
+external_ip = urllib.request.urlopen('https://4.ident.me').read().decode('utf8')
+print("Public IP: " + str(external_ip))
+update_firebase_scale("External IP", str(external_ip))
+update_firebase_scale("Local IP", str(local_ip))
+display_message("Local IP", local_ip, "External IP", external_ip)
+time.sleep(2)
 
-# Put readings to an array to display
-overlayArray = ['Load Cell Raw Value: ' + str(loadCellMass) + 'g',
-                'Temp: ' + str(sht_temperature) + ' C', 
-                'Humidity: ' + str(sht_relative_humidity) + '%',
-                'UV Index: ' + str(ltr_uvi),
-                'Lux: ' + str(ltr_lux)]
+# define the variables that will store information, all are floats
+loadCellMass = gain = 0.0 # Used for NAU7802 (ADC)
+sht_temperature = sht_relative_humidity = 0.0 # Used for SHT40 (temp + humidity sensor)
+ltr_uvi = ltr_lux = 0.0 # Used for LTR390 (UV + LUX sensor)
 
 # Get readings and round them accordingly, this updates the variables defined above and pushes them to Firebase
 def getSensorReadings():
@@ -100,26 +149,23 @@ def getSensorReadings():
     global sht_relative_humidity
     global ltr_uvi
     global ltr_lux
-    global overlayArray
+
     # get the raw value around to a whole number and multiply by gain
     loadCellMass = round(read_raw_value() * gain, 1)
     if loadCellMass < 0.0:
          loadCellMass = 0.0
+
     # get the temperature (C) and round to one decimal
     sht_temperature = round(sht.temperature, 1)
+
     # get the humidity (%) and round to one decimal
     sht_relative_humidity = round(sht.relative_humidity, 1)
+
     # get the UV index and round to one decimal
     ltr_uvi = round(ltr.uvi, 1)
+
     # get the LUX level and round to whole number
     ltr_lux = round(ltr.lux)
-
-    # update the overlay array
-    overlayArray = ['Load Cell Raw Value: ' + str(loadCellMass) + 'g',
-                'Temp: ' + str(sht_temperature) + ' ' + degree_sign +'C', 
-                'Humidity: ' + str(sht_relative_humidity) + '%',
-                'UV Index: ' + str(ltr_uvi),
-                'LUX: ' + str(ltr_lux) + 'lx']
     
     # push these values to Firebase 
     update_firebase_scale("Scale Mass",loadCellMass) 
@@ -127,8 +173,6 @@ def getSensorReadings():
     update_firebase_scale("Scale Humidity", sht_relative_humidity) 
     update_firebase_scale("Scale UV", ltr_uvi) 
     update_firebase_scale("Scale Lux", ltr_lux) 
-
-    # berryIMU.tiltCheck()
 
     # Print the sensor readings to console for logging purposes
     print("=====")
@@ -138,7 +182,6 @@ def getSensorReadings():
     print('SHT4X: Temperature = ' + str(sht_temperature) + degree_sign + 'C, Humidity = ' + str(sht_relative_humidity) + '%')
 
     print('LTR390: UV Index = ' + str(ltr_uvi) + ', Lux = ' + str(ltr_lux))
-
 
 # this defines the container data structure which will store information we have on each container
 # containers will be identified via their numbers and their names can be adjusted in the web GUI
@@ -187,13 +230,14 @@ class container:
             print(str(thisContainer.qr) + ": Initial mass updated, now " + str(thisContainer.initialMass) + "g")
         thisContainer.updatePercentage()
 
-# the dictionary to store containers, now pulls the initial masses from firebase 
+# the dictionary to store containers, pulls the initial masses from firebase for % calculations
 containerDict = dict()
 containerDict["Container_1"] = container("Container_1", get_initial_mass("Container_1"), 0)
 containerDict["Container_2"] = container("Container_2", get_initial_mass("Container_2"), 0)
 containerDict["Container_3"] = container("Container_3", get_initial_mass("Container_3"), 0)
 containerDict["Container_4"] = container("Container_4", get_initial_mass("Container_4"), 0)
 
+# Zeros the ADC channel
 def zero_channel():
     """Initiate internal calibration for current channel.Use when scale is started,
     a new channel is selected, or to adjust for measurement drift. Remove weight
@@ -208,6 +252,7 @@ def zero_channel():
     )
     print("...channel %1d zeroed" % nau7802.channel)
 
+# Reads the raw values from the ADC, we take the average of 5 samples
 def read_raw_value(samples=5):
     """Read and average consecutive raw sample values. Return average raw value."""
     sample_sum = 0
@@ -266,45 +311,13 @@ gain = get_scale_gain()
 if(gain == 0.0):
     calibrate_weight_sensor()
 
-print("LOAD CELL READY")
+print("ADC AND LOAD CELL READY")
 
 sht = adafruit_sht4x.SHT4x(board.I2C())
 print("SHT4X READY")
 
-i2c = busio.I2C(board.SCL, board.SDA)
 ltr = adafruit_ltr390.LTR390(i2c)
 print("LTR390 READY")
-
-oled_reset = digitalio.DigitalInOut(board.D4)
-disp = adafruit_ssd1305.SSD1305_I2C(128, 32, i2c, reset=oled_reset)
-
-# Clear display.
-disp.fill(0)
-disp.show()
-
-# Create blank image for drawing.
-# Make sure to create image with mode '1' for 1-bit color.
-width = disp.width
-height = disp.height
-image = Image.new("1", (width, height))
-
-# Get drawing object to draw on image.
-draw = ImageDraw.Draw(image)
-
-# Draw a black filled box to clear the image.
-draw.rectangle((0, 0, width, height), outline=0, fill=0)
-
-# Draw some shapes.
-# First define some constants to allow easy resizing of shapes.
-padding = -2
-top = padding
-bottom = height - padding
-# Move left to right keeping track of the current x position for drawing shapes.
-x = 0
-
-# Load default font.
-font = ImageFont.load_default()
-print("SSD1305 DISPLAY READY")
 
 getSensorReadings()
 
@@ -318,37 +331,6 @@ presentContainers = {
   "Container_3": False,
   "Container_4": False
 }
-
-""" Display the IP address on the OLED """
-def display_ip():
-    draw.text((x, top + 0),  "Local IP", font=font, fill=255)
-    draw.text((x, top + 8),  local_ip, font=font, fill=255)
-    draw.text((x, top + 16),  "External IP", font=font, fill=255)
-    draw.text((x, top + 25),  external_ip, font=font, fill=255)
-    disp.image(image)
-    disp.show()
-    time.sleep(2)
-
-# Obtain the local and public IP address of the Pi + print to console 
-def getIP():
-    global local_ip
-    global external_ip
-
-    cmd = "hostname -I | cut -d' ' -f1"
-    local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
-    print("Local IP: " + local_ip)
-    external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
-    print("Public IP: " + str(external_ip))
-    update_firebase_ip(external_ip)
-    display_ip()
-
-# Push the IP to Firebase
-# If we are using eduroam we can use this IP to log in remotely
-def update_firebase_ip(IP):
-    update_firebase_scale("Public IP", str(IP))
-
-getIP()
-
 
 """ Find the new container that resulted in the mass change """
 def findNewContainer(): # Returns a string with the name of the new container
@@ -434,39 +416,14 @@ def findRemovedContainer(): # Returns a string with the name of the container th
 
 """ Display container names and percentages on the OLED """
 def update_display():
-    # Draw a black filled box to clear the image.
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-
     # Gather the information to display for each container
-    c1 = ("*" if presentContainers["Container_1"] else " ") + get_name("Container_1") + ": " + containerDict["Container_1"].getPercentage()
-    c2 = ("*" if presentContainers["Container_2"] else " ") + get_name("Container_2") + ": " + containerDict["Container_2"].getPercentage()
-    c3 = ("*" if presentContainers["Container_3"] else " ") + get_name("Container_3") + ": " + containerDict["Container_3"].getPercentage()
-    c4 = ("*" if presentContainers["Container_4"] else " ") + get_name("Container_4") + ": " + containerDict["Container_4"].getPercentage()
+    line1 = ("*" if presentContainers["Container_1"] else " ") + get_name("Container_1") + ": " + containerDict["Container_1"].getPercentage()
+    line2 = ("*" if presentContainers["Container_2"] else " ") + get_name("Container_2") + ": " + containerDict["Container_2"].getPercentage()
+    line3 = ("*" if presentContainers["Container_3"] else " ") + get_name("Container_3") + ": " + containerDict["Container_3"].getPercentage()
+    line4 = ("*" if presentContainers["Container_4"] else " ") + get_name("Container_4") + ": " + containerDict["Container_4"].getPercentage()
 
-    # Draw our four lines of text
-    draw.text((x, top + 0),  c1, font=font, fill=255)
-    draw.text((x, top + 8),  c2, font=font, fill=255)
-    draw.text((x, top + 16), c3, font=font, fill=255)
-    draw.text((x, top + 25), c4, font=font, fill=255)
-
-    # Display image.
-    disp.image(image)
-    disp.show()
-    time.sleep(0.2)
-
-""" Display status messages on the OLED """
-def display_message(line1, line2):
-    # Draw a black filled box to clear the image.
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-
-    # Draw our four lines of text
-    draw.text((x, top + 0),  line1, font=font, fill=255)
-    draw.text((x, top + 8),  line2, font=font, fill=255)
-
-    # Display image.
-    disp.image(image)
-    disp.show()
-    time.sleep(0.1)
+    # Display the gathered information
+    display_message(line1, line2, line3, line4)
 
 ### Main loop
 while True:
@@ -533,10 +490,7 @@ while True:
         # Put in the back of prevMasses the newest mass
         prevMasses.append(loadCellMass)
 
-# release the camera that we have initialized for our code
-cap.release()
-# clear the display
-draw.rectangle((0, 0, width, height), outline=0, fill=0)
+
 
 
 

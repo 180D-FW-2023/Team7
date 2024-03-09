@@ -9,7 +9,8 @@
 		"Scale Lux": 0.0,
 		"Scale Gain": 0.0,
 		"Scale Tilted": 0,
-		"Public IP": "0.0.0.0",
+		"External IP": "0.0.0.0",
+		"Local IP": "0.0.0.0",
 		"Container_1":
 		{
 			"Container Name": "Container_1",
@@ -89,7 +90,8 @@
 		"Scale Lux": 0.0,
 		"Scale Gain": 0.0,
 		"Scale Tilted": 0,
-		"Public IP": "0.0.0.0",
+		"External IP": "0.0.0.0",
+		"Local IP": "0.0.0.0",
 		"Container_1":
 		{
 			"Container Name": "Container_1",
