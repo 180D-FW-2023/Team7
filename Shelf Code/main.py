@@ -265,17 +265,25 @@ def read_raw_value(samples=5):
     return int(sample_sum / samples)
 
 # Returns a gain value, we will store this and multiply read_raw_value's output to get the mass in grams 
+empty_weight_reading = 0
 def calibrate_weight_sensor():
     global gain
-    # Prompt the user to press enter when the sensor is empty
-    print("Please remove all objects from the scale and press enter.")
-    input()
-
-    # Read the value of the sensor when empty
-    empty_weight_reading = read_raw_value(10)
+    global empty_weight_reading
 
     # Prompt the user to enter the weight in grams of the item they place on the scale
-    print("Now place the item on the scale.")
+    print("Please place the calibration weight on the scale")
+    display_message("Please place the", "calibration weight on"  "the shelf", "(5)")
+    time.sleep(1)
+    display_message("Please place the", "calibration weight on"  "the shelf", "(4)")
+    time.sleep(1)
+    display_message("Please place the", "calibration weight on"  "the shelf", "(3)")
+    time.sleep(1)
+    display_message("Please place the", "calibration weight on"  "the shelf", "(2)")
+    time.sleep(1)
+    display_message("Please place the", "calibration weight on"  "the shelf", "(1)")
+    time.sleep(1)
+
+    """ Replace this section with the calibration weight mass """
     item_weight = float(input("Enter the weight of the item in grams: "))
 
     # Read the value of the sensor with the item on it
@@ -287,9 +295,18 @@ def calibrate_weight_sensor():
     # Print the calibration parameters
     print("Scale Gain:", gain)
     update_firebase_scale("Scale Gain", gain)
-    print("Please remove all objects from the scale within the next 5 seconds.")
-    time.sleep(5)
-    print("Calibration complete!")
+    display_message("Remove all items", "from the shelf", "(5)")
+    time.sleep(1)
+    display_message("Remove all items", "from the shelf", "(4)")
+    time.sleep(1)
+    display_message("Remove all items", "from the shelf", "(3)")
+    time.sleep(1)
+    display_message("Remove all items", "from the shelf", "(2)")
+    time.sleep(1)
+    display_message("Remove all items", "from the shelf", "(1)")
+    time.sleep(1)
+    display_message("Calibration", "Completed!")
+    print("Calibration completed!")
 
 # Instantiate 24-bit load sensor ADC, one channel with default gain of 128
 nau7802 = NAU7802(board.I2C(), address=0x2A, active_channels=1)
@@ -301,10 +318,26 @@ enabled = nau7802.enable(True)
 print("Digital and analog power enabled:", enabled)
 
 print("REMOVE WEIGHTS FROM LOAD CELLS")
-time.sleep(3)
+display_message("Remove all items", "from the shelf", "(5)")
+time.sleep(1)
+display_message("Remove all items", "from the shelf", "(4)")
+time.sleep(1)
+display_message("Remove all items", "from the shelf", "(3)")
+time.sleep(1)
+display_message("Remove all items", "from the shelf", "(2)")
+time.sleep(1)
+display_message("Remove all items", "from the shelf", "(1)")
+time.sleep(1)
 
+# Calibrate and zero channel
 nau7802.channel = 1
-zero_channel()  # Calibrate and zero channel
+zero_channel()  
+
+# Store in the event we need to determine the gain
+empty_weight_reading = read_raw_value(10) 
+
+# Tell the user we have zeroed the scale
+display_message("The shelf has", "been zeroed")
 
 # Check if we have a gain stored in Firebase, if not obtain a new one
 gain = get_scale_gain()
