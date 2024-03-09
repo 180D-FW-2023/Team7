@@ -92,7 +92,7 @@ print("SSD1305 DISPLAY READY")
 path = "Easter Egg Movies"
 movie_list = os.listdir(path)
 print("Movies in ", path, ":")
-print(move_list)
+print(movie_list)
 
 def easterEgg():
 
