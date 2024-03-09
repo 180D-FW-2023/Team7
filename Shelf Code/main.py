@@ -146,8 +146,6 @@ def easterEgg():
     print("Thanks for watching!")
     display_message("Thanks for", "watching!")
 
-easterEgg()
-
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('ece-180-project-firebase-adminsdk-7eg04-74b6c29e0b.json')
 #                               ^ DO NOT PUSH THIS JSON FILE TO GITHUB, CONTAINS ACCESS TOKENS!!!
@@ -504,7 +502,7 @@ def update_display():
 while True:
     if get_easter_egg_status():
         easterEgg()
-        
+
     getSensorReadings()
     update_display()
     avgOfPrevMasses = sum(prevMasses) / len(prevMasses)
