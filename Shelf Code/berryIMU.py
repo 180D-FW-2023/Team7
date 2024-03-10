@@ -36,6 +36,10 @@ YP_11 = 0.0
 KFangleX = 0.0
 KFangleY = 0.0
 
+IMU.initIMU()
+a = datetime.datetime.now()
+
+
 def kalmanFilterY ( accAngle, gyroRate, DT):
     y=0.0
     S=0.0
