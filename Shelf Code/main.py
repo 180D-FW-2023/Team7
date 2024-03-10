@@ -30,7 +30,7 @@ degree_sign = u'\N{DEGREE SIGN}'
 thresholdMass = 27 
 
 # Threshold in angles for IMU tilt warning
-threshold = 10.0
+threshold = 7.5
 
 # Prepare the display
 i2c = busio.I2C(board.SCL, board.SDA)
