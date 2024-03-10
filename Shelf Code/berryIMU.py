@@ -205,7 +205,7 @@ while True:
 
     ##################### END Tilt Compensation ########################
 
-    threshold = 30.0
+    threshold = 20.0
 
     if abs(CFangleX) >= threshold or abs(CFangleY) >= threshold:
         print('Tilted')
