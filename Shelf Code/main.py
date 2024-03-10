@@ -29,6 +29,9 @@ degree_sign = u'\N{DEGREE SIGN}'
 # units are grams, +/-1 gram 
 thresholdMass = 27 
 
+# Threshold in angles for IMU tilt warning
+threshold = 10.0
+
 # Prepare the display
 i2c = busio.I2C(board.SCL, board.SDA)
 oled_reset = digitalio.DigitalInOut(board.D4)
@@ -482,7 +485,6 @@ tiltCompensatedHeading = 180 * math.atan2(magYcomp,magXcomp)/M_PI
 if tiltCompensatedHeading < 0:
     tiltCompensatedHeading += 360
 ##################### END Tilt Compensation ########################
-threshold = 15.0
 if abs(CFangleX) >= threshold or abs(CFangleY) >= threshold:
     print('BerryIMU: Tilted')
     update_firebase_scale("Scale Tilted", 1)
@@ -598,7 +600,7 @@ def update_display():
 while True:
     if get_easter_egg_status():
         easterEgg()
-        
+
     getSensorReadings()
 
     #Read the accelerometer,gyroscope and magnetometer values
@@ -668,7 +670,6 @@ while True:
     if tiltCompensatedHeading < 0:
         tiltCompensatedHeading += 360
     ##################### END Tilt Compensation ########################
-    threshold = 15.0
     if abs(CFangleX) >= threshold or abs(CFangleY) >= threshold:
         print('BerryIMU: Tilted')
         update_firebase_scale("Scale Tilted", 1)
