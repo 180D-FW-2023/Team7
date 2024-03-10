@@ -1,26 +1,22 @@
 import time
 import board
 from cedargrove_nau7802 import NAU7802
-import smbus2 as smbus
-import math
 import adafruit_sht4x
 import busio
 import adafruit_ltr390
 import cv2
 from pyzbar.pyzbar import decode
-import numpy as np
 import os 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
-import json
 import subprocess
 import digitalio
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1305
 from requests import get
 import urllib.request
-import berryIMU
+from berryIMU import *
 import random
 
 # Be sure to update this line
