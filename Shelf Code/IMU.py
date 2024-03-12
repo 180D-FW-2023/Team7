@@ -76,9 +76,6 @@ LSM6DSL_INT_DUR2         =  0x5A
 LSM6DSL_WAKE_UP_THS      =  0x5B
 LSM6DSL_FUNC_SRC1        =  0x53
 
-
-
-
 def writeByte(device_address,register,value):
     bus.write_byte_data(device_address, register, value)
 

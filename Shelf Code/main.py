@@ -465,9 +465,6 @@ heading = 180 * math.atan2(MAGy,MAGx)/M_PI
 #Only have our heading between 0 and 360
 if heading < 0:
     heading += 360
-####################################################################
-###################Tilt compensated heading#########################
-####################################################################
 #Normalize accelerometer raw values.
 accXnorm = ACCx/math.sqrt(ACCx * ACCx + ACCy * ACCy + ACCz * ACCz)
 accYnorm = ACCy/math.sqrt(ACCx * ACCx + ACCy * ACCy + ACCz * ACCz)
