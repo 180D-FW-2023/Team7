@@ -5,4 +5,6 @@ adafruit-circuitpython-register
 adafruit-circuitpython-sht4x 
 adafruit-circuitpython-ltr390 
 adafruit-circuitpython-ssd1305
-
+pyzbar
+pyzbar[scripts]
+firebase_admin
