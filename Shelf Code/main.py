@@ -1,3 +1,9 @@
+import os
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 import time
 import board
 from cedargrove_nau7802 import NAU7802
@@ -6,7 +12,6 @@ import busio
 import adafruit_ltr390
 import cv2
 from pyzbar.pyzbar import decode
-import os 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
@@ -19,9 +24,7 @@ import urllib.request
 from berryIMU import *
 import random
 
-abspath = os.path.abspath(__file__)
-dname = os.path.dirname(abspath)
-os.chdir(dname)
+
 
 # Be sure to update this line
 # i.e. "/Scale_2/"
