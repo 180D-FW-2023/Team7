@@ -8,3 +8,4 @@ adafruit-circuitpython-ssd1305
 pyzbar
 pyzbar[scripts]
 firebase_admin
+opencv-python

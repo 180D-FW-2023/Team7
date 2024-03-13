@@ -219,14 +219,14 @@ def get_name(container):
     name = db.reference(scale_id + container + "/Container Name" )
     return name.get()
 
-"""" Obtain the local and public IP address of the Pi + print to console + display """
-cmd = "hostname -I | cut -d' ' -f1"
-local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
-print("Local IP: " + local_ip)
-external_ip = urllib.request.urlopen('https://4.ident.me').read().decode('utf8')
-print("Public IP: " + str(external_ip))
-update_firebase_scale("External IP", str(external_ip))
-update_firebase_scale("Local IP", str(local_ip))
+# """" Obtain the local and public IP address of the Pi + print to console + display """
+# cmd = "hostname -I | cut -d' ' -f1"
+# local_ip = str(subprocess.check_output(cmd, shell=True).decode("utf-8"))
+# print("Local IP: " + local_ip)
+# external_ip = urllib.request.urlopen('https://4.ident.me').read().decode('utf8')
+# print("Public IP: " + str(external_ip))
+# update_firebase_scale("External IP", str(external_ip))
+# update_firebase_scale("Local IP", str(local_ip))
 # display_message("Local IP", local_ip, "External IP", external_ip)
 
 # define the variables that will store information, all are floats
