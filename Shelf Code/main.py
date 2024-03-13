@@ -36,6 +36,8 @@ degree_sign = u'\N{DEGREE SIGN}'
 # units are grams, +/-1 gram 
 thresholdMass = 27 
 
+containerMass = 37
+
 # Threshold in angles for IMU tilt warning
 threshold = 5
 
@@ -313,6 +315,10 @@ class container:
     # this function updates the current mass locally and in Firebase, it accepts an int 
     # updates the % in Firebase also!
     def updateCurrentMass(thisContainer, newMass):
+        # Account for the weight of the containers
+        newMass = newMass - containerMass
+        if ( newMass < 0 ):
+            newMass = 0.0 # If somehow the mass becomes less than 0, we set it to zero
         thisContainer.currentMass = round(newMass,2)
         print(str(thisContainer.qr) + ": Current mass updated, now " + str(thisContainer.currentMass) + "g")
         update_firebase_container(thisContainer.qr,"Current Container Mass", round(newMass,2))

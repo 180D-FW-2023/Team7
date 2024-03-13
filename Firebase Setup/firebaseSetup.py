@@ -1,3 +1,9 @@
+import os
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
