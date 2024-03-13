@@ -733,6 +733,9 @@ while True:
         # Notify the user we found the container that was removed
         display_message(get_name(removedContainer), "was removed!")
         time.sleep(.5)
+        
+        # Get a settled reading from the scale
+        getSensorReadings()
 
         # Make all the prevMasses the current mass so the next iteration doesn't think there was a change
         prevMasses = [loadCellMass, loadCellMass, loadCellMass, loadCellMass, loadCellMass]
