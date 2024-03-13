@@ -6,3 +6,29 @@
     font-weight: 400;
     margin-top: 0px;
 }
+
+.bottom-left-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 200px;
+    width: 200px;
+    background-color: transparent !important;
+    /* box-shadow: 0 !important; */
+    /* outline: none !important; */
+    /* border: none !important; */
+    /* margin: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; */
+}
+
+/* .ant-btn, .ant-btn:focus, .ant-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+    border: 0px !important;
+} */

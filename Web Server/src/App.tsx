@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Shelves from './Shelves'
+import Inventory from './Inventory';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         Current Stock
       </div>
       <div>
-        <Shelves/>
+        <Inventory/>
       </div>
     </div>
   );

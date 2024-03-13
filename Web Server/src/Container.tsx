@@ -26,18 +26,19 @@ interface ContainerProps {
   onUVToggle: (value: boolean) => void;
   onHumidToggle: (value: boolean) => void;
   onTempToggle: (value: boolean) => void;
+  inputModalTitle: (value: string) => void;
 }
 
 const Container: React.FC<ContainerProps> = ({ containerPercent, containerName, initialMass, currentMass, inputLUXValue, inputUVValue, inputMaxHumid,
   inputMinHumid, inputMaxTemp, inputMinTemp, humidBool, luxBool, tempBool, uvBool,
-  onInputLUXChange, onInputUVChange, onInputHumidChange, onInputTempChange, onLUXToggle, onUVToggle, onHumidToggle, onTempToggle
+  onInputLUXChange, onInputUVChange, onInputHumidChange, onInputTempChange, onLUXToggle, onUVToggle, onHumidToggle, onTempToggle, inputModalTitle
   }) => {//add onInputLUXChange back into params
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalTitle, setModalTitle] = useState('');
+  // const [modalTitle, setModalTitle] = useState(containerName);
   // const [inputLUXValue, setInputLUXValue] = useState(0);
   
-  const handleCardClick = (title : string ) => {
-    setModalTitle(title);
+  const handleCardClick = () => {
+    // setModalTitle(title);
     setModalVisible(true);
   };
 
@@ -51,13 +52,13 @@ const Container: React.FC<ContainerProps> = ({ containerPercent, containerName, 
 
   return (
     <div>
-      <Card headStyle={{border: 'none'}} title={containerName} onClick={() => handleCardClick(containerName)}>
+      <Card headStyle={{border: 'none', textAlign: 'center'}} bodyStyle={{ textAlign: 'center'}}  title={containerName} onClick={handleCardClick}>
         <Progress type="circle" percent={containerPercent} format={(percent) => `${percent}%`}/>
       </Card>
       <ContainerInfo 
         visible={modalVisible}
         onCancel={handleModalCancel}
-        title={modalTitle}
+        initialTitle={containerName}
         containerPercent={containerPercent}
         initialMass={initialMass}
         currentMass={currentMass}
@@ -79,6 +80,7 @@ const Container: React.FC<ContainerProps> = ({ containerPercent, containerName, 
         onUVToggle={onUVToggle}
         onHumidToggle={onHumidToggle}
         onTempToggle={onTempToggle}
+        inputModalTitle={inputModalTitle}
         />
     </div>
   );

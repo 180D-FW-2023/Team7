@@ -1,23 +1,26 @@
 import firebase from './firebase';
 
-interface AllContainerData {
-    containerID: string;
-    inputLUXValue: number;
-    inputUVValue: number;
-    inputMaxHumid: number;
-    inputMinHumid: number;
-    inputMaxTemp: number;
-    inputMinTemp: number;
-    inputLUXBool: boolean;
-    inputUVBool: boolean;
-    inputHumidBool: boolean;
-    inputTempBool: boolean;
+interface ShelfData {
+  shelfID: string;
+  shelfTitle: string;
+  containerID: string;
+  containerName: string;
+  inputLUXValue: number;
+  inputUVValue: number;
+  inputMaxHumid: number;
+  inputMinHumid: number;
+  inputMaxTemp: number;
+  inputMinTemp: number;
+  inputLUXBool: boolean;
+  inputUVBool: boolean;
+  inputHumidBool: boolean;
+  inputTempBool: boolean;
 }
 
-interface shelfData {
-    shelfID: string;
-    title: string;
-  }
+interface easterEggData {
+  eggName: string;
+  eggState: boolean;
+}
 
 const database = firebase.database();
 
@@ -44,41 +47,57 @@ export const fetchData = async () => {
 //     });
 //   };
 
-export const sendContainerDataToFirebase = (containerData: AllContainerData[]) => {
-    containerData.forEach(container => {
-        const { containerID, inputLUXValue, inputUVValue , inputMaxHumid, inputMinHumid, inputMaxTemp, inputMinTemp, 
-                inputLUXBool, inputUVBool, inputHumidBool, inputTempBool} = container;
-        // console.log("Sent?", containerID, inputLUXValue, inputUVValue)
-        // Depending on your container data structure, you can extract other relevant information here
-
-        // Now you can push this data to your Firebase database
-        database.ref(`Scale_1/${containerID}`).update({
-            ["Max Storage Lux"]: inputLUXValue,
-            ["Max Storage UV"]: inputUVValue,
-            ["Max Storage Humidity"]: inputMaxHumid,
-            ["Min Storage Humidity"]: inputMinHumid,
-            ["Max Storage Temperature"]: inputMaxTemp,
-            ["Min Storage Temperature"]: inputMinTemp,
-            ["Lux Bool"]: inputLUXBool,
-            ["UV Bool"]: inputUVBool,
-            ["Humidity Bool"]: inputHumidBool,
-            ["Temperature Bool"]: inputTempBool,
-            // Other relevant data fields for this container
-        });
-    });
-};
-
-export const sendShelfDataToFirebase = (shelfData: shelfData[]) => {
+export const sendDataToFirebase = (shelfData: ShelfData[]) => {
     shelfData.forEach(shelf => {
-        const { shelfID, title} = shelf;
+        const { shelfID, shelfTitle, containerID, containerName, inputLUXValue, inputUVValue , inputMaxHumid, inputMinHumid, inputMaxTemp, inputMinTemp, 
+                inputLUXBool, inputUVBool, inputHumidBool, inputTempBool} = shelf;
         // console.log("Sent?", containerID, inputLUXValue, inputUVValue)
         // Depending on your container data structure, you can extract other relevant information here
-        console.log("title", title)
+
         // Now you can push this data to your Firebase database
         database.ref(`${shelfID}`).update({
-            
-            ["Scale Name"]: title,
+            [`${containerID}/Max Storage Lux`]: inputLUXValue,
+            [`${containerID}/Max Storage UV`]: inputUVValue,
+            [`${containerID}/Max Storage Humidity`]: inputMaxHumid,
+            [`${containerID}/Min Storage Humidity`]: inputMinHumid,
+            [`${containerID}/Max Storage Temperature`]: inputMaxTemp,
+            [`${containerID}/Min Storage Temperature`]: inputMinTemp,
+            [`${containerID}/Lux Bool`]: inputLUXBool,
+            [`${containerID}/UV Bool`]: inputUVBool,
+            [`${containerID}/Humidity Bool`]: inputHumidBool,
+            [`${containerID}/Temperature Bool`]: inputTempBool,
+            [`${containerID}/Container Name`]: containerName,
+            ["Scale Name"]: shelfTitle,
             // Other relevant data fields for this container
         });
     });
 };
+
+export const sendEasterEggDataToFirebase = (eggData: easterEggData[]) => {
+  eggData.forEach(egg => {
+      const { eggName, eggState } = egg;
+      // console.log("Sent?", containerID, inputLUXValue, inputUVValue)
+      // Depending on your container data structure, you can extract other relevant information here
+
+      // Now you can push this data to your Firebase database
+      database.ref(`${eggName}`).update({
+          ["Toggle"]: eggState,
+          // Other relevant data fields for this container
+      });
+  });
+};
+
+// export const sendShelfDataToFirebase = (shelfData: shelfData[]) => {
+//     shelfData.forEach(shelf => {
+//         const { shelfID, title} = shelf;
+//         // console.log("Sent?", containerID, inputLUXValue, inputUVValue)
+//         // Depending on your container data structure, you can extract other relevant information here
+//         console.log("title", title)
+//         // Now you can push this data to your Firebase database
+//         database.ref(`${shelfID}`).update({
+            
+//             ["Scale Name"]: title,
+//             // Other relevant data fields for this container
+//         });
+//     });
+// };

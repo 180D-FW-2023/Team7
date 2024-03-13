@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Progress, Col, Row, Switch, Slider } from 'antd';
-import { sendContainerDataToFirebase } from './firebaseService';
+import { Modal, Progress, Col, Row, Switch, Slider, Button, Input } from 'antd';
+import { EditOutlined, CloseCircleOutlined } from '@ant-design/icons';
+// import { sendContainerDataToFirebase } from './firebaseService';
 import './ContainerInfo.css'
 
 interface ContainerInfoProps {
     visible: boolean;
     onCancel: () => void;
-    title: string;
+    initialTitle: string;
     containerPercent: number;
     initialMass: number;
     currentMass: number;
@@ -28,12 +29,13 @@ interface ContainerInfoProps {
     onUVToggle: (value: boolean) => void;
     onHumidToggle: (value: boolean) => void;
     onTempToggle: (value: boolean) => void;
+    inputModalTitle: (value: string) => void;
 }
 
-const ContainerInfo: React.FC<ContainerInfoProps> = ({ visible, onCancel, title, containerPercent, initialMass, currentMass, initialInputLUXValue, initialInputUVValue, 
+const ContainerInfo: React.FC<ContainerInfoProps> = ({ visible, onCancel, initialTitle, containerPercent, initialMass, currentMass, initialInputLUXValue, initialInputUVValue, 
     initialInputMaxHumid, initialInputMinHumid, initialInputMaxTemp, initialInputMinTemp, initialHumidBool, initialLUXBool, initialTempBool,
     initialUVBool,
-    onInputLUXChange, onInputUVChange, onInputHumidChange, onInputTempChange, onLUXToggle, onUVToggle, onHumidToggle, onTempToggle
+    onInputLUXChange, onInputUVChange, onInputHumidChange, onInputTempChange, onLUXToggle, onUVToggle, onHumidToggle, onTempToggle, inputModalTitle
      }) => { //add onInputLUXChange back into params
     // let initialLUXToggleState: boolean = false;
     // let initialUVToggleState: boolean = false;
@@ -69,6 +71,9 @@ const ContainerInfo: React.FC<ContainerInfoProps> = ({ visible, onCancel, title,
     const [toggleUV, setToggleUV] = useState(initialUVBool);
     const [toggleHumidity, setToggleHumidity] = useState(initialHumidBool);
     const [toggleTemperature, setToggleTemperature] = useState(initialTempBool);
+    const [title, setTitle] = useState<string>(initialTitle);
+    const [isEditing, setIsEditing] = useState(false);
+    const [newTitle, setNewTitle] = useState<string>(title);
 
 
     // const [inputData, setInputData] = useState('');
@@ -173,11 +178,76 @@ const ContainerInfo: React.FC<ContainerInfoProps> = ({ visible, onCancel, title,
     // }, [inputLUXValue, inputUVValue]);
     // setInputValue(newValue);
 
+    console.log("TITLE?", title)
+    console.log("initial", initialTitle)
+
+    const onEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //   event.stopPropagation();
+      setIsEditing(true);
+    }
+  
+    const onCancelEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    //   event.stopPropagation();
+      setNewTitle(title);
+      setIsEditing(false);
+    }
+  
+    const onSave = () => {
+      setTitle(newTitle);
+      inputModalTitle(newTitle);
+      setIsEditing(false);
+  
+      // console.log("ttile", newTitle)
+    };
+  
+    const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        // event.stopPropagation(); // Prevent the default behavior of form submission
+        onSave(); // Call the onSave function when Enter key is pressed
+      }
+    };
+    
+    // let progressColor: string = "";
+    // if (containerPercent <= 10)
+    // {
+    //     progressColor = "FF2400";
+    // }
+    // else if (containerPercent > 10 && containerPercent <= 30 )
+    // {
+    //     progressColor = "orange"
+    // }
+    // else if (containerPercent >= 90)
+    // {
+    //     progressColor = "#52c41a"
+    // }
+    // else
+    // {
+    //     progressColor = "#1677ff"
+    // }
+
   return (
     <Modal
       visible={visible}
       onCancel={onCancel}
-      title={title}
+      title ={isEditing ?
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Input placeholder={initialTitle} size='large' style={{ width: '40%', marginRight: '5px' }} 
+            value={newTitle} onChange={(e) => setNewTitle(e.target.value)}
+            onPressEnter={handleEnterPress}
+            />
+            <Button type="text" style={{ padding: '0px' }} onClick={onCancelEdit}>
+                <CloseCircleOutlined />
+            </Button>
+        </div>
+        :
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <span style={{ marginRight: '8px' }}>{title}</span>
+            <Button type="text" style={{ padding: '0px' }} onClick={onEdit}>
+                <EditOutlined style={{ fontSize: '15px', paddingLeft: '0px' }} />
+            </Button>
+        </div>
+        }
+    //   title={title}
       footer={null}
       className="modaltitle"
     >
