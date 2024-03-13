@@ -129,7 +129,7 @@ sudo cp -r ~/CircuitPython_NAU7802/cedargrove_nau7802.py /usr/local/lib/python3.
 cd ~ 
 wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
 sudo -E env PATH=$PATH python3 raspi-blinka.py
-pip install -r pipPackages.txt
+sudo pip install -r pipPackages.txt
 
 sudo -i
 
