@@ -719,7 +719,7 @@ while True:
     # CASE 2: DECREASE IN MASS
     elif (abs(differenceInMass) > thresholdMass):
         # wait one second so the QR is out of the frame 
-        time.sleep(.5)
+        time.sleep(2)
 
         # Tell the user we are searching for a container that was removed
         display_message("Determining what was", "removed...")
