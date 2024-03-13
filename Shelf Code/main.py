@@ -19,6 +19,10 @@ import urllib.request
 from berryIMU import *
 import random
 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 # Be sure to update this line
 # i.e. "/Scale_2/"
 scale_id = "/Scale_1/"
