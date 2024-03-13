@@ -137,8 +137,8 @@ def easterEgg():
         time.sleep(.5)
 
         # define q as the exit button
-        if cv2.waitKey(25) & 0xFF == ord('q'):
-            break
+        # if cv2.waitKey(25) & 0xFF == ord('q'):
+            # break
         
     # release the video capture object
     cap.release()
