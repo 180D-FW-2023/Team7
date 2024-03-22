@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Contains all the code needed to run the web server. This project was bootstrapped with Create React App. More information can be found in the ```README.md``` found in the directory. The web server can be hosted locally or in the cloud with services such as AWS. Please note you will need to provide your own ```firebase.tsx``` and place it in ```src```.
 
 ## Available Scripts
 
